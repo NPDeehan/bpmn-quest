@@ -21,7 +21,7 @@ public class InMemoryH2Test {
   @Rule
   public ProcessEngineRule rule = new ProcessEngineRule();
 
-  private static final String PROCESS_DEFINITION_KEY = "CharacterCreator";
+  private static final String PROCESS_DEFINITION_KEY = "adventure";
 
   // enable more detailed logging
   static {
@@ -38,7 +38,7 @@ public class InMemoryH2Test {
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = "createcharacter.bpmn")
+  @Deployment(resources = {"adventure.bpmn", "fight.bpmn"})
   public void testParsingAndDeployment() {
     
 	  // Given we create a new process instance
@@ -56,10 +56,10 @@ public class InMemoryH2Test {
 	    // Fight or Flee Task
 	    task = rule.getTaskService().createTaskQuery().singleResult();
 	    
-	    assertEquals("Fight or Flee", task.getName());
-	    rule.getTaskService().setVariable(task.getId(), "startFight", true);
-	    
-	    rule.getTaskService().complete(task.getId());
+//	    assertEquals("Fight or Flee", task.getName());
+//	    rule.getTaskService().setVariable(task.getId(), "startFight", true);
+//	    
+//	    rule.getTaskService().complete(task.getId());
 	    
 	    // Then the process instance should be ended
 //	    assertThat(processInstance).isEnded();
