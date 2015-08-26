@@ -146,6 +146,18 @@
         <artifactId>wildfly-maven-plugin</artifactId>
         <version>1.0.2.Final</version>
       </plugin>
+  
+        <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.2</version>
+            <configuration>
+                <url>http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/manager/text</url>
+                <username>camunda</username>
+                <password>camunda</password>
+            </configuration>
+        </plugin>
+      
       
     </plugins>
   </build>

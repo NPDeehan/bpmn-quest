@@ -2,6 +2,8 @@ package org.camunda.bpmn.quest.CharacterCreator;
 
 import org.apache.ibatis.logging.LogFactory;
 import org.camunda.bpm.engine.impl.util.LogUtil;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.Deployment;
 import org.junit.Before;
@@ -36,9 +38,24 @@ public class InMemoryH2Test {
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = "process.bpmn")
+  @Deployment(resources = "createcharacter.bpmn")
   public void testParsingAndDeployment() {
-    // nothing is done here, as we just want to check for exceptions during deployment
+    
+	  // Given we create a new process instance
+	    ProcessInstance processInstance = rule.getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
+	    // Then it should be active
+	    assertThat(processInstance).isActive();
+	    
+	    Task task = rule.getTaskService().createTaskQuery().singleResult();
+	    
+	    assertEquals("Create Your Character", task.getName());
+	    rule.getTaskService().complete(task.getId());
+
+	    // Then the process instance should be ended
+	    assertThat(processInstance).isEnded();
+
+	  
+	  
   }
 
 }
