@@ -25,25 +25,25 @@ public class CreateCharacterDelegate implements JavaDelegate {
 		String storyText = "Welcome to BPMN Quest! First thing's first, you need to create a character. Start by choosing a name and then move onto adding"
 				+ "your stats. All stats are editiable except for life points and in the end all of your stats must add up to 350. Good luck!";
 		
-		Vector<String> feilds = new Vector<String>();
-		feilds.add("characterName");
-		feilds.add("strength");
-		feilds.add("perception");
-		feilds.add("endurance");
-		feilds.add("charisma");
-		feilds.add("inteligance");
-		feilds.add("agility");
-		feilds.add("luck");
+		Vector<String> fields = new Vector<String>();
+		fields.add("characterName");
+		fields.add("strength");
+		fields.add("perception");
+		fields.add("endurance");
+		fields.add("charisma");
+		fields.add("inteligance");
+		fields.add("agility");
+		fields.add("luck");
 		
 		NameEditableFieldsUtil nefUtil = new NameEditableFieldsUtil();
 		
-		String editableFields = nefUtil.getEditableFieldsInJson(feilds, "playerCharacter");
+		String editableFields = nefUtil.getEditableFieldsInJson(fields, "playerCharacter");
 		
 		System.out.println(editableFields);
 		
 		execution.setVariable("storyText", storyText);
 		
-		execution.setVariable("editiableFeilds", editableFields);
+		execution.setVariable("editableFields", editableFields);
 		execution.setVariable("playerCharacter", defaultCharSerialized);
 
 	}
