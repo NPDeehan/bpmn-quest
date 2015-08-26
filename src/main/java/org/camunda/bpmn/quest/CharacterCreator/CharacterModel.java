@@ -17,6 +17,10 @@ public class CharacterModel {
 	
 	
 	
+	public CharacterModel() {
+		super();
+	}
+
 	// Constructor that creates a custom character with custom attributes
 	public CharacterModel(String characterName, int strength, int perception,
 			int endurance, int charisma, int inteligance, int agility, int luck) {

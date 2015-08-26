@@ -46,13 +46,23 @@ public class InMemoryH2Test {
 	    // Then it should be active
 	    assertThat(processInstance).isActive();
 	    
+
+	    // Create Character Task
 	    Task task = rule.getTaskService().createTaskQuery().singleResult();
 	    
 	    assertEquals("Create Your Character", task.getName());
 	    rule.getTaskService().complete(task.getId());
 
+	    // Fight or Flee Task
+	    task = rule.getTaskService().createTaskQuery().singleResult();
+	    
+	    assertEquals("Fight or Flee", task.getName());
+	    rule.getTaskService().setVariable(task.getId(), "startFight", true);
+	    
+	    rule.getTaskService().complete(task.getId());
+	    
 	    // Then the process instance should be ended
-	    assertThat(processInstance).isEnded();
+//	    assertThat(processInstance).isEnded();
 
 	  
 	  

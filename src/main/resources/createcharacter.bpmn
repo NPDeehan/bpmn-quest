@@ -31,8 +31,12 @@
       <bpmn2:outgoing>SequenceFlow_0hwh6zm</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_1ltecyw" sourceRef="UserTask_1k3uxz8" targetRef="ExclusiveGateway_01gpf6n"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_0zs4umv" name="NO!" sourceRef="ExclusiveGateway_01gpf6n" targetRef="UserTask_1nci7wr"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_0hwh6zm" name="Yes!" sourceRef="ExclusiveGateway_01gpf6n" targetRef="ServiceTask_0m90xbh"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_0zs4umv" name="NO!" sourceRef="ExclusiveGateway_01gpf6n" targetRef="UserTask_1nci7wr">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!startFight}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_0hwh6zm" name="Yes!" sourceRef="ExclusiveGateway_01gpf6n" targetRef="ServiceTask_0m90xbh">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{startFight}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
     <bpmn2:exclusiveGateway id="ExclusiveGateway_1wuuvw0">
       <bpmn2:incoming>SequenceFlow_03849u0</bpmn2:incoming>
       <bpmn2:incoming>SequenceFlow_1jvy7wv</bpmn2:incoming>
@@ -45,7 +49,7 @@
       <bpmn2:incoming>SequenceFlow_0zs4umv</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1jvy7wv</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:serviceTask id="ServiceTask_0m90xbh" name="Start fight">
+    <bpmn2:serviceTask id="ServiceTask_0m90xbh" camunda:class="org.camunda.bpmn.quest.CharacterCreator.FightDelegate" name="Start fight">
       <bpmn2:incoming>SequenceFlow_0hwh6zm</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_0qrfh3e</bpmn2:outgoing>
     </bpmn2:serviceTask>
