@@ -1,7 +1,14 @@
 package org.camunda.bpmn.quest.CharacterCreator;
 
-public class CharacterModel {
+import java.io.Serializable;
+
+public class CharacterModel implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	String characterName;
 	
 	String id;

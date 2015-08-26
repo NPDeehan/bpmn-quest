@@ -12,9 +12,16 @@ public class CreateCharacterDelegate implements JavaDelegate {
 	{
 		CharacterModel defaulChar = new CharacterModel("Hero!");
 		
-		ObjectValue defaultCharSerialized = Variables.objectValue(defaulChar)
-				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
-				  .create();
+//		ObjectValue defaultCharSerialized = Variables.objectValue(defaulChar)
+//				  .serializationDataFormat(Variables.SerializationDataFormats.JAVA)
+//				  .create();
+		
+
+		ObjectValue defaultCharSerialized =
+				Variables.objectValue(defaulChar).serializationDataFormat("application/json").create();
+		
+		String storyText = "Welcome to BPMN Quest! First thing's first, you need to create a character. Start by choosing a name and then move onto adding"
+				+ "your stats. All stats are editiable except for life points and in the end all of your stats must add up to 350. Good luck!";
 		
 		execution.setVariable("playerCharacter", defaultCharSerialized);
 
