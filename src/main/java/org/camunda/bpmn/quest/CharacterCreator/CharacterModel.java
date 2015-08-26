@@ -4,6 +4,8 @@ public class CharacterModel {
 	
 	String characterName;
 	
+	String id;
+	
 	int lifePoints = 50;
 	
 	// all stats are between 1 and 100 
@@ -22,9 +24,10 @@ public class CharacterModel {
 	}
 
 	// Constructor that creates a custom character with custom attributes
-	public CharacterModel(String characterName, int strength, int perception,
+	public CharacterModel(String id, String characterName, int strength, int perception,
 			int endurance, int charisma, int inteligance, int agility, int luck) {
 		super();
+		this.id = id;
 		this.characterName = characterName;
 		this.strength = strength;
 		this.perception = perception;
@@ -158,6 +161,14 @@ public class CharacterModel {
 
 	public void setLifePoints(int lifePoints) {
 		this.lifePoints = lifePoints;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	
