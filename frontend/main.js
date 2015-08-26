@@ -10,6 +10,54 @@ window.addEventListener('load', function(evt) {
     document.getElementById('story').appendChild(line);
   };
 
+  var createInputs = function(inputFields, variables) {
+    console.log(inputFields);
+    var table = document.createElement('table');
+    for(var path in inputFields) {
+      if (inputFields.hasOwnProperty(path)) {
+        var pathParts = path.split('.');
+        var value = variables;
+        for(var j = 0; j < pathParts.length; j++) {
+          value = value[pathParts[j]];
+          if(j === 0) {
+            value = JSON.parse(value.value);
+          }
+        }
+        console.log('creating input field for', path, 'with value', value);
+
+        var row = document.createElement('tr');
+        var label = document.createElement('td');
+        label.textContent = inputFields[path];
+        row.appendChild(label);
+
+        var cell2 = document.createElement('td');
+        var input = document.createElement('input');
+        input.value = value;
+        cell2.appendChild(input);
+        row.appendChild(cell2);
+
+        document.getElementById('story').appendChild(row);
+      }
+    }
+  };
+
+  var completeStep = function() {
+    console.log('not yet implemented');
+  };
+
+  var addSubmitButton = function() {
+    var row = document.createElement('li');
+    var button = document.createElement('button');
+    button.textContent = 'continue';
+    row.appendChild(button);
+
+    button.addEventListener('click', function() {
+      completeStep();
+    });
+
+    document.getElementById('story').appendChild(row);
+  };
+
   var requestVariables = function() {
     var xmlhttp = new XMLHttpRequest();
 
@@ -21,6 +69,15 @@ window.addEventListener('load', function(evt) {
             console.log('done loading variables', jsonResponse);
 
             addLine(jsonResponse.storyText.value);
+
+            addLine('--');
+
+            //TODO: do not use split
+            createInputs(JSON.parse(jsonResponse.editiableFeilds.value), jsonResponse);
+
+            addLine('--');
+
+            addSubmitButton();
 
           } else {
             console.log('error loading variABLES', xmlhttp);

@@ -1,14 +1,15 @@
 #topContainer {
   height: 330px;
   border-top: 1px dotted black;
-  margin-left: -20px;
   padding: 8px;
-  margin-top: -15px;
+  margin-top: -23px;
 }
 
 #gameContainer h1 {
   text-align: center;
   font-family: 'Fredericka the Great', cursive;
+  padding: 20px;
+  background-color: #8C5000;
 }
 
 #map {
@@ -34,7 +35,7 @@
 
 #actionLog ul {
     overflow: auto;
-    height: calc( 100% - 480px);
+    height: calc( 100% - 485px);
     display: block;
     position: absolute;
     width: 900px;
@@ -106,7 +107,6 @@
   margin: auto;
   width: 1024px;
   background-color: antiquewhite;
-  padding-left: 20px;
   height: calc(100% - 40px);
   margin-top: 20px;
 }
