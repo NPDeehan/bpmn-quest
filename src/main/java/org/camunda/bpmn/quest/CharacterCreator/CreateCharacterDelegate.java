@@ -10,7 +10,7 @@ public class CreateCharacterDelegate implements JavaDelegate {
 	{
 		CharacterModel defaulChar = new CharacterModel("Hero!");
 		
-		execution.setVariable("defualChar", defaulChar);
+		execution.setVariable("playerCharacter", defaulChar);
 
 	}
 
