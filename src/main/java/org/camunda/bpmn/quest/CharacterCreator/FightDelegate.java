@@ -89,7 +89,7 @@ public class FightDelegate implements JavaDelegate {
 	    long aPercentage = Math.round ( (diceRoll() * attacker.getAgility()) - ( (diceRoll() * defender.getAgility()) )  );
 		long lPercentage = Math.round ( (diceRoll() * attacker.getLuck()) - ( (diceRoll() * defender.getLuck()) ) );
 		
-		long lostLifePoints = Math.round (sPercentage * 0.05) + Math.round (aPercentage * 0.03) + Math.round (lPercentage * 0.02);
+		long lostLifePoints = Math.round (sPercentage * 0.5) + Math.round (aPercentage * 0.3) + Math.round (lPercentage * 0.2);
 
 		// Don't lose negative Lifepoints
 		if (lostLifePoints < 0) lostLifePoints = 0;

@@ -17,7 +17,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 		List<CharacterModel> monsters = generateMonsterPool();
 		
 		Random rn = new Random();
-		int randomNumber = rn.nextInt(2) + 1;
+		int randomNumber = rn.nextInt(4);
 		
 		CharacterModel thisMonster = monsters.get(randomNumber);
 		
@@ -27,11 +27,6 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 		
 		execution.setVariable("thisMonster", monsterDataValue);
 		
-		// Just for Testing
-		CharacterModel player = new CharacterModel("jakob", "Jakob the Hero", 50, 50, 50, 50, 50, 10, 150);
-		execution.setVariable("playerCharacter", player);
-		
-
 	}
 	
 	private List<CharacterModel> generateMonsterPool () {
@@ -62,6 +57,18 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				40 // Luck
 				));
 
+		monsters.add(new CharacterModel(
+				"falseoracle",
+				"The False Oracle",
+				70, // Strength
+				30, // Perception
+				30, // Endurance
+				30, // Charisma
+				30, // Intelligence
+				30, // Agility
+				10 // Luck
+				));
+		
 		monsters.add(new CharacterModel(
 				"lordwebsfear",
 				"Lord Web's Fear",

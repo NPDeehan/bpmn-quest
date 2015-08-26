@@ -1,0 +1,23 @@
+
+<form class="form-horizontal">
+<script cam-script type="text/form-script">
+
+    inject(['$http', 'Uri', function($http, Uri) {
+      camForm.on('form-loaded', function() {
+        $http.get(Uri.appUri("engine://engine/:engine/task/" + camForm.taskId + "/form")).success(function(result){
+          
+          $scope.contextPath = result.contextPath;
+        });
+      });
+    }]);
+
+</script>
+
+<H1>Sorry Man, you're dead.</h1>
+
+<p>
+  Here you could add a comment or whatever for your high score list entry.
+</p>
+
+
+</form>
