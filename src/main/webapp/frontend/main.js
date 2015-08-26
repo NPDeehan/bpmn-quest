@@ -1,6 +1,16 @@
 window.addEventListener('load', function(evt) {
   'use strict';
 
+  var useAlternativeLandingPage = Math.random() < .05;
+  if(useAlternativeLandingPage) {
+    document.getElementById('landingPage').style.backgroundImage = "url('resources/alternativeLandingPageDark.jpg')";
+    document.getElementById('gameContainer').style.backgroundImage = "url('resources/alternativeLandingPageDark.jpg')";
+  } else {
+    document.getElementById('landingPage').style.backgroundImage = "url('resources/landingPageBackgroundDark.jpg')";
+    document.getElementById('gameContainer').style.backgroundImage = "url('resources/landingPageBackgroundDark.jpg')";
+  }
+
+
   var GAME_ID = '';
   var currentTask = '';
   var currentPIID = '';
