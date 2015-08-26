@@ -13,6 +13,8 @@ public class CharacterModel implements Serializable {
 	
 	String id;
 	
+	int experiancePoints;
+	
 	int lifePoints = 50;
 	
 	// all stats are between 1 and 100 
@@ -176,6 +178,14 @@ public class CharacterModel implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public int getExperiancePoints() {
+		return experiancePoints;
+	}
+
+	public void setExperiancePoints(int experiancePoints) {
+		this.experiancePoints = experiancePoints;
 	}
 
 	
