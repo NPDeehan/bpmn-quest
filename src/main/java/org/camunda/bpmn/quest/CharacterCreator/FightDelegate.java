@@ -18,18 +18,26 @@ public class FightDelegate implements JavaDelegate {
 		//CharacterModel monster = new CharacterModel("monster", "Monster", 50, 50, 50, 50, 50, 10, 10);
 		
 		FightResult result = fightToDeath (monster);
-		
-		// overwrite player in execution context to reflect lost lifepoints
-		execution.setVariable("playerCharacter", player);
-		
+
+		int wonXP = 0;
 		String fightOutcome = "";
 		
 		if (player.getLifePoints() < 1) {
 			fightOutcome = "died";
 		} else {
 			fightOutcome = "survived";
+			wonXP = monster.getExperiencePoints();
+			player.addExperiencePoints(wonXP);
 		}
 		execution.setVariable("fightOutcome", fightOutcome);
+		execution.setVariable("wonXP", wonXP);
+
+		// overwrite player in execution context to reflect lost lifepoints and gained experiencepoints
+		ObjectValue playerDataValue = Variables.objectValue(player)
+				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
+				  .create();		
+		execution.setVariable("playerCharacter", playerDataValue);
+
 		
 		ObjectValue resultDataValue = Variables.objectValue(result)
 				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)

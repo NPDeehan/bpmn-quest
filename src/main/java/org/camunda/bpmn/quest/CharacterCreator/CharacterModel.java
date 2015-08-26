@@ -13,7 +13,7 @@ public class CharacterModel implements Serializable {
 	
 	String id;
 	
-	int experiancePoints;
+	int experiencePoints;
 	
 	int lifePoints = 50;
 	
@@ -34,7 +34,7 @@ public class CharacterModel implements Serializable {
 
 	// Constructor that creates a custom character with custom attributes
 	public CharacterModel(String id, String characterName, int strength, int perception,
-			int endurance, int charisma, int inteligance, int agility, int luck) {
+			int endurance, int charisma, int inteligance, int agility, int luck, int experiencePoints) {
 		super();
 		this.id = id;
 		this.characterName = characterName;
@@ -45,6 +45,7 @@ public class CharacterModel implements Serializable {
 		this.inteligance = inteligance;
 		this.agility = agility;
 		this.luck = luck;
+		this.experiencePoints = experiencePoints;
 		
 		generateLifePoints();
 		
@@ -180,14 +181,16 @@ public class CharacterModel implements Serializable {
 		this.id = id;
 	}
 
-	public int getExperiancePoints() {
-		return experiancePoints;
+	public int getExperiencePoints() {
+		return experiencePoints;
 	}
 
-	public void setExperiancePoints(int experiancePoints) {
-		this.experiancePoints = experiancePoints;
+	public void setExperiencePoints(int experiencePoints) {
+		this.experiencePoints = experiencePoints;
 	}
 
-	
+	public void addExperiencePoints (int points) {
+		this.experiencePoints = this.experiencePoints + points;
+	}
 
 }

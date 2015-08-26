@@ -42,7 +42,8 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				30, // Charisma
 				30, // Intelligence
 				30, // Agility
-				30 // Luck
+				30, // Luck
+				10 // Experience Points
 				));
 	
 		monsters.add(new CharacterModel(
@@ -54,7 +55,8 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				30, // Charisma
 				30, // Intelligence
 				70, // Agility
-				40 // Luck
+				40, // Luck
+				40 // Experience Points
 				));
 
 		monsters.add(new CharacterModel(
@@ -66,7 +68,8 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				30, // Charisma
 				30, // Intelligence
 				30, // Agility
-				10 // Luck
+				10, // Luck
+				70 // Experience Points
 				));
 		
 		monsters.add(new CharacterModel(
@@ -78,7 +81,8 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				30, // Charisma
 				30, // Intelligence
 				10, // Agility
-				20 // Luck
+				20, // Luck
+				100 // Experience Points
 				));
 		
 		return monsters;		

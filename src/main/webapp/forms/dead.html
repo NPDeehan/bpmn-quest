@@ -11,9 +11,22 @@
       });
     }]);
 
+var variableManager = camForm.variableManager;
+
+    camForm.on('form-loaded', function() {
+
+      variableManager.fetchVariable('playerCharacter');
+
+    });
+
+    camForm.on('variables-fetched', function() {
+
+      $scope.player = camForm.variableManager.variableValue('playerCharacter');      
+
+    });
 </script>
 
-<H1>Sorry Man, you're dead.</h1>
+<H1>Sorry {{player.characterName}}, you're dead. You've made {{player.experiencePoints}} XP in this game.</h1>
 
 <p>
   Here you could add a comment or whatever for your high score list entry.

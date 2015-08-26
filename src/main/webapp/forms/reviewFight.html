@@ -18,6 +18,7 @@
       variableManager.fetchVariable('thisMonster');
 
       variableManager.fetchVariable('fightOutcome');
+      variableManager.fetchVariable('wonXP');
 
       variableManager.fetchVariable('fightProtocol');
     });
@@ -28,6 +29,7 @@
       $scope.monsterName = camForm.variableManager.variableValue('thisMonster').characterName;
 
       $scope.fightOutcome = camForm.variableManager.variableValue('fightOutcome');
+      $scope.wonXP = camForm.variableManager.variableValue('wonXP');
 
       $scope.result = camForm.variableManager.variableValue('fightProtocol');
 
@@ -42,7 +44,7 @@
 </script>
 
 <H2>You've fought against {{monsterName}} and</h2>
-<h1>You've {{fightOutcome}}!</h1>
+<h1>You've {{fightOutcome}} and gained {{wonXP}} XP!</h1>
 
 <p>
   Either way it was a great experience, wasn't it?
