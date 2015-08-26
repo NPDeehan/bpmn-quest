@@ -3,6 +3,7 @@ window.addEventListener('load', function(evt) {
 
   var GAME_ID = '';
   var currentTask = '';
+  var currentPIID = '';
 
   var addLine = function(text) {
     var line = document.createElement('li');
@@ -73,15 +74,7 @@ window.addEventListener('load', function(evt) {
 
       xmlhttp.onreadystatechange = function() {
           if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
-            if(xmlhttp.status == 200){
-              console.log('done', xmlhttp);
-              var jsonResponse = JSON.parse(xmlhttp.responseText);
-              GAME_ID = jsonResponse.id;
-
-              requestFirstTask();
-            } else {
-              console.log('error', xmlhttp);
-            }
+            requestFirstTask();
           }
       };
 
@@ -126,7 +119,7 @@ window.addEventListener('load', function(evt) {
             addLine('--');
 
             //TODO: do not use split
-            var inputFields = createInputs(JSON.parse(jsonResponse.editiableFeilds.value), jsonResponse);
+            var inputFields = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
 
             addLine('--');
 
@@ -138,7 +131,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-instance/'+GAME_ID+'/variables/?deserializeValues=false', true);
+    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-instance/'+currentPIID+'/variables/?deserializeValues=false', true);
 
     xmlhttp.send();
 
@@ -154,6 +147,7 @@ window.addEventListener('load', function(evt) {
             var jsonResponse = JSON.parse(xmlhttp.responseText);
             console.log('current task is', jsonResponse);
             currentTask = jsonResponse[0].id;
+            currentPIID = jsonResponse[0].processInstanceId;
 
             // get the variables
 
@@ -164,7 +158,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/task/?processInstanceId='+GAME_ID, true);
+    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/task/?processInstanceBusinessKey='+GAME_ID, true);
 
     xmlhttp.send();
   };
@@ -176,8 +170,6 @@ window.addEventListener('load', function(evt) {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
           if(xmlhttp.status == 200){
             console.log('done', xmlhttp);
-            var jsonResponse = JSON.parse(xmlhttp.responseText);
-            GAME_ID = jsonResponse.id;
 
             requestFirstTask();
           } else {
@@ -190,8 +182,10 @@ window.addEventListener('load', function(evt) {
 
     xmlhttp.setRequestHeader('Content-type', 'application/json');
 
+    GAME_ID = Math.random().toString(36).substr(2);
     xmlhttp.send(JSON.stringify({
-      variables: {}
+      variables: {},
+      businessKey: GAME_ID
     }));
   };
 
