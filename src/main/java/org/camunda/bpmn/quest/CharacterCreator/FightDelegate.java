@@ -2,6 +2,9 @@ package org.camunda.bpmn.quest.CharacterCreator;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
+
 import static org.camunda.spin.Spin.JSON;
 
 public class FightDelegate implements JavaDelegate {
@@ -10,23 +13,31 @@ public class FightDelegate implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 		
 		this.player = (CharacterModel) execution.getVariable("playerCharacter");
+		CharacterModel monster = (CharacterModel) execution.getVariable("thisMonster");	
 		
-		CharacterModel monster = new CharacterModel("Monster", 50, 50, 50, 50, 50, 10, 10);
+		//CharacterModel monster = new CharacterModel("monster", "Monster", 50, 50, 50, 50, 50, 10, 10);
 		
 		FightResult result = fightToDeath (monster);
 		
 		// overwrite player in execution context to reflect lost lifepoints
 		execution.setVariable("playerCharacter", player);
 		
-		execution.setVariable("newestFightProtocol", result);
+		String fightOutcome = "";
 		
-		// Create a Json out of the result protocol
-		/*
-		String json = JSON(result).toString();	
-		execution.setVariable("newestFightProtocol", json);
-		*/
+		if (player.getLifePoints() < 1) {
+			fightOutcome = "died";
+		} else {
+			fightOutcome = "survived";
+		}
+		execution.setVariable("fightOutcome", fightOutcome);
 		
+		ObjectValue resultDataValue = Variables.objectValue(result)
+				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
+				  .create();
 		
+		execution.setVariable("fightProtocol", resultDataValue);
+		
+	
 	}
 	
 	// Fight until one character is dead, return the other as the winner 

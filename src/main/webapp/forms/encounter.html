@@ -1,0 +1,48 @@
+
+<form class="form-horizontal">
+<script cam-script type="text/form-script">
+
+    inject(['$http', 'Uri', function($http, Uri) {
+      camForm.on('form-loaded', function() {
+        $http.get(Uri.appUri("engine://engine/:engine/task/" + camForm.taskId + "/form")).success(function(result){
+          
+          $scope.contextPath = result.contextPath;
+        });
+      });
+    }]);
+
+  var variableManager = camForm.variableManager;
+
+    camForm.on('form-loaded', function() {
+
+      variableManager.fetchVariable('thisMonster');
+    });
+
+    camForm.on('variables-fetched', function() {
+
+      $scope.monsterId = camForm.variableManager.variableValue('thisMonster').id;      
+      $scope.monsterName = camForm.variableManager.variableValue('thisMonster').characterName;
+
+    });
+
+</script>
+
+<H1>There is {{monsterName}}!</h1>
+
+<p>
+  The Monster is fast asleep, but you can stir it up and show what you can!
+</p>
+
+ <img ng-src="{{contextPath}}/monsters/img/{{monsterId}}.png" />
+
+  <div class="control-group">
+    <label class="control-label">Fight the Monster?</label>
+    <div class="controls">
+      <input type="checkbox"
+             cam-variable-name="startFight"
+             cam-variable-type="Boolean"
+             name="startFight"
+             class="form-control" />
+    </div>
+  </div>
+</form>

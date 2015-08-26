@@ -1,0 +1,62 @@
+
+<form class="form-horizontal">
+<script cam-script type="text/form-script">
+
+    inject(['$http', 'Uri', function($http, Uri) {
+      camForm.on('form-loaded', function() {
+        $http.get(Uri.appUri("engine://engine/:engine/task/" + camForm.taskId + "/form")).success(function(result){
+          
+          $scope.contextPath = result.contextPath;
+        });
+      });
+    }]);
+
+  var variableManager = camForm.variableManager;
+
+    camForm.on('form-loaded', function() {
+
+      variableManager.fetchVariable('thisMonster');
+
+      variableManager.fetchVariable('fightOutcome');
+
+      variableManager.fetchVariable('fightProtocol');
+    });
+
+    camForm.on('variables-fetched', function() {
+
+      $scope.monsterId = camForm.variableManager.variableValue('thisMonster').id;      
+      $scope.monsterName = camForm.variableManager.variableValue('thisMonster').characterName;
+
+      $scope.fightOutcome = camForm.variableManager.variableValue('fightOutcome');
+
+      $scope.result = camForm.variableManager.variableValue('fightProtocol');
+
+      var resultList = camForm.variableManager.variableValue('fightProtocol').protocol;
+
+      $.each(resultList, function(i, obj) {
+        $('#protocol').append(obj + "\n");
+      });
+
+    });
+
+</script>
+
+<H2>You've fought against {{monsterName}} and</h2>
+<h1>You've {{fightOutcome}}!</h1>
+
+<p>
+  Either way it was a great experience, wasn't it?
+</p>
+
+ <img ng-src="{{contextPath}}/monsters/img/{{fightOutcome}}.png" />
+
+<h2>Fight Protocol</h2>
+<h3>Rounds fought: {{result.rounds}}</h3>
+<h3>Winner's Life Points: {{result.winner.lifePoints}}</h3>
+<h3>Loser's Life Points: {{result.loser.lifePoints}}</h3>
+<h3>Round Details</h3>
+<textarea cols="150" rows="20" id="protocol"></textarea>
+
+
+
+</form>
