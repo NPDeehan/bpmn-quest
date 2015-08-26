@@ -1,0 +1,112 @@
+#topContainer {
+  height: 330px;
+  border-top: 1px dotted black;
+  margin-left: -20px;
+  padding: 8px;
+  margin-top: -15px;
+}
+
+#gameContainer h1 {
+  text-align: center;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+#map {
+  width: 500px;
+  height: 330px;
+  border: 1px solid black;
+  position: absolute;
+  background-image: url('resources/mapBackground.jpg');
+}
+
+#playerData {
+  font-family: 'Pinyon Script', cursive;
+      font-weight: bold;
+    font-size: 37px;
+  position: absolute;
+  left: 450px;
+  display: none;
+}
+
+#actionLog li {
+  list-style: none
+}
+
+#actionLog ul {
+    overflow: auto;
+    height: calc( 100% - 480px);
+    display: block;
+    position: absolute;
+    width: 900px;
+}
+
+#gameContainer{
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url('resources/landingPageBackgroundDark.jpg');
+}
+
+#landingPage {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color: black;
+  color: white;
+}
+
+#landingPage h1 {
+  font-family: 'Fredericka the Great', cursive;
+      font-weight: bold;
+      text-shadow: 0 0 20px #fefcc9, 10px -10px 30px #feec85, -20px -20px 40px #ffae34, 20px -40px 50px #ec760c, -20px -60px 60px #cd4606, 0 -80px 70px #973716, 10px -90px 80px #451b0e;
+    font-size: 100px;
+    margin-top: 200px;
+
+}
+
+#landingPage {
+  background-image: url('resources/landingPageBackgroundDark.jpg');
+}
+
+#startButton {
+  background: #DBBA34;
+  background-image: -webkit-linear-gradient(top, #DBBA34, #B96429);
+  background-image: -moz-linear-gradient(top, #DBBA34, #B96429);
+  background-image: -ms-linear-gradient(top, #DBBA34, #B96429);
+  background-image: -o-linear-gradient(top, #DBBA34, #B96429);
+  background-image: linear-gradient(to bottom, #DBBA34, #B96429);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  text-shadow: 2px 2px 3px #666666;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 27px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border-color: black;
+}
+
+#startButton:hover {
+  background: #B96429;
+  background-image: -webkit-linear-gradient(top, #B96429, #DBBA34);
+  background-image: -moz-linear-gradient(top, #B96429, #DBBA34);
+  background-image: -ms-linear-gradient(top, #B96429, #DBBA34);
+  background-image: -o-linear-gradient(top, #B96429, #DBBA34);
+  background-image: linear-gradient(to bottom, #B96429, #DBBA34);
+  text-decoration: none;
+}
+
+#containerOverlay {
+  margin: auto;
+  width: 1024px;
+  background-color: antiquewhite;
+  padding-left: 20px;
+  height: calc(100% - 40px);
+  margin-top: 20px;
+}
