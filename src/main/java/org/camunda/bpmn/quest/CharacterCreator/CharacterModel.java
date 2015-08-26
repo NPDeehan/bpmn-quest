@@ -30,7 +30,7 @@ public class CharacterModel {
 		this.agility = agility;
 		this.luck = luck;
 		
-		setLifePoints();
+		generateLifePoints();
 		
 	}
 	
@@ -39,7 +39,7 @@ public class CharacterModel {
 		super();
 		this.characterName = characterName;
 		
-		setLifePoints();
+		generateLifePoints();
 	}
 
 
@@ -61,10 +61,12 @@ public class CharacterModel {
 
 
 
-	public void setLifePoints() {
+	public void generateLifePoints() {
 		this.lifePoints = 50 + this.endurance ;
 		
 	}
+	
+	
 
 
 
@@ -148,6 +150,10 @@ public class CharacterModel {
 
 	public void setLuck(int luck) {
 		this.luck = luck;
+	}
+
+	public void setLifePoints(int lifePoints) {
+		this.lifePoints = lifePoints;
 	}
 
 	
