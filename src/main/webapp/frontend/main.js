@@ -132,7 +132,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('POST', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-definition/key/CharacterCreator/start', true);
+    xmlhttp.open('POST', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-definition/key/adventure/start', true);
 
     xmlhttp.setRequestHeader('Content-type', 'application/json');
 
