@@ -48,7 +48,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-image: url('resources/landingPageBackgroundDark.jpg');
 }
 
 #landingPage {
@@ -68,10 +67,6 @@
     font-size: 100px;
     margin-top: 200px;
 
-}
-
-#landingPage {
-  background-image: url('resources/landingPageBackgroundDark.jpg');
 }
 
 #startButton {

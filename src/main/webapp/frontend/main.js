@@ -1,8 +1,19 @@
 window.addEventListener('load', function(evt) {
   'use strict';
 
+  var useAlternativeLandingPage = Math.random() < .05;
+  if(useAlternativeLandingPage) {
+    document.getElementById('landingPage').style.backgroundImage = "url('resources/alternativeLandingPageDark.jpg')";
+    document.getElementById('gameContainer').style.backgroundImage = "url('resources/alternativeLandingPageDark.jpg')";
+  } else {
+    document.getElementById('landingPage').style.backgroundImage = "url('resources/landingPageBackgroundDark.jpg')";
+    document.getElementById('gameContainer').style.backgroundImage = "url('resources/landingPageBackgroundDark.jpg')";
+  }
+
+
   var GAME_ID = '';
   var currentTask = '';
+  var currentPIID = '';
 
   var addLine = function(text) {
     var line = document.createElement('li');
@@ -37,22 +48,67 @@ window.addEventListener('load', function(evt) {
         row.appendChild(cell2);
 
         document.getElementById('story').appendChild(row);
+
+        inputFields.inputMap = inputFields.inputMap || {};
+
+        inputFields.inputMap[path] = input;
       }
     }
+    return inputFields;
   };
 
-  var completeStep = function() {
-    console.log('not yet implemented');
+  // HACK HACK HACK
+  var creationCompleted = false;
+  var completeStep = function(inputFields) {
+    console.log(inputFields);
+
+    if(!creationCompleted) {
+      creationCompleted = true;
+      var payload = {
+        "value" : "{\"characterName\":\"Hero!\",\"id\":null,\"lifePoints\":1,\"strength\":50,\"perception\":50,\"endurance\":50,\"charisma\":50,\"inteligance\":50,\"agility\":50,\"luck\":50}",
+        "type" : "Object",
+        "valueInfo" : {
+          "objectTypeName": "org.camunda.bpmn.quest.CharacterCreator.CharacterModel",
+          "serializationDataFormat": "application/json"
+        }
+      }
+      var val = JSON.parse(payload.value);
+      for(var key in inputFields.inputMap) {
+        var name = key.substr(key.indexOf('.')+1);
+        val[name] = inputFields.inputMap[key].value;
+      }
+      payload.value = JSON.stringify(val);
+      console.log(payload);
+
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+            requestFirstTask();
+          }
+      };
+
+      xmlhttp.open('POST', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/task/'+currentTask+'/complete', true);
+
+      xmlhttp.setRequestHeader('Content-type', 'application/json');
+
+      xmlhttp.send(JSON.stringify({
+        variables: {
+          playerCharacter: payload
+        }
+      }));
+    }
+
   };
 
-  var addSubmitButton = function() {
+  var addSubmitButton = function(inputFields) {
     var row = document.createElement('li');
     var button = document.createElement('button');
     button.textContent = 'continue';
     row.appendChild(button);
 
     button.addEventListener('click', function() {
-      completeStep();
+      completeStep(inputFields);
     });
 
     document.getElementById('story').appendChild(row);
@@ -73,11 +129,11 @@ window.addEventListener('load', function(evt) {
             addLine('--');
 
             //TODO: do not use split
-            createInputs(JSON.parse(jsonResponse.editiableFeilds.value), jsonResponse);
+            var inputFields = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
 
             addLine('--');
 
-            addSubmitButton();
+            addSubmitButton(inputFields);
 
           } else {
             console.log('error loading variABLES', xmlhttp);
@@ -85,7 +141,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-instance/'+GAME_ID+'/variables/?deserializeValues=false', true);
+    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-instance/'+currentPIID+'/variables/?deserializeValues=false', true);
 
     xmlhttp.send();
 
@@ -99,7 +155,9 @@ window.addEventListener('load', function(evt) {
           if(xmlhttp.status == 200){
             console.log('done loading character creation', xmlhttp);
             var jsonResponse = JSON.parse(xmlhttp.responseText);
-            currentTask = jsonResponse.id;
+            console.log('current task is', jsonResponse);
+            currentTask = jsonResponse[0].id;
+            currentPIID = jsonResponse[0].processInstanceId;
 
             // get the variables
 
@@ -110,7 +168,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/task/?processInstanceId='+GAME_ID, true);
+    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/task/?processInstanceBusinessKey='+GAME_ID, true);
 
     xmlhttp.send();
   };
@@ -122,8 +180,6 @@ window.addEventListener('load', function(evt) {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
           if(xmlhttp.status == 200){
             console.log('done', xmlhttp);
-            var jsonResponse = JSON.parse(xmlhttp.responseText);
-            GAME_ID = jsonResponse.id;
 
             requestFirstTask();
           } else {
@@ -136,8 +192,10 @@ window.addEventListener('load', function(evt) {
 
     xmlhttp.setRequestHeader('Content-type', 'application/json');
 
+    GAME_ID = Math.random().toString(36).substr(2);
     xmlhttp.send(JSON.stringify({
-      variables: {}
+      variables: {},
+      businessKey: GAME_ID
     }));
   };
 
