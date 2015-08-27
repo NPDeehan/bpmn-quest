@@ -16,11 +16,11 @@ public class GenerateIntroDialog implements TaskListener {
 	{
 		
 		CharacterModel  charMod = (CharacterModel) delegateTask.getVariable("playerCharacter");
-		String storytext = charMod.getCharacterName() + " get's in a bit of trouble \n "
+		String storytext = charMod.getCharacterName() + " finds a bit of trouble \n "
 				+ "As you make your way to a local pub for a well deserved drink you come accross a group of thugs beating up an innocent marketing manager."
 				+ "While gernally you're not to fond of marketing people, you feel maybe if you help he'll learn a lesson and perhaps re-skill to become"
 				+ " something useful to society... or you could just gab some popcorn and watch the action! \n "
-				+ "To help the marketing manager type 'Help' to ignore him type 'Keep Moving'  ";
+				+ "To help the marketing manager type 'Help' to ignore him type 'Keep Moving' ";
 		
 		
 	
@@ -37,6 +37,8 @@ public class GenerateIntroDialog implements TaskListener {
 		
 		delegateTask.setVariable("editableFields", editableFields);
 		delegateTask.setVariable("storytext", storytext);
+		delegateTask.setVariable("characterChoice", "Help"); // this is a default that can be edited by the user
+		
 		
 	}
 

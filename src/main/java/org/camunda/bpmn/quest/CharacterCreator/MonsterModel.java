@@ -1,9 +1,16 @@
 package org.camunda.bpmn.quest.CharacterCreator;
+import java.io.Serializable;
+
 import org.camunda.bpmn.quest.CharacterCreator.CharacterModel;
 
 
 public class MonsterModel extends CharacterModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String monsterStory;
 	
 	public MonsterModel() {

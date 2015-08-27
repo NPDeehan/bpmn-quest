@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_yEP_wEw3EeWgiPmbFRGXNA" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_yEP_wEw3EeWgiPmbFRGXNA" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
   <bpmn2:process id="Process_1" isExecutable="false">
     <bpmn2:userTask id="UserTask_17burh1" name="Read Opening Dialog">
+      <bpmn2:extensionElements>
+        <camunda:taskListener class="org.camunda.bpmn.quest.superStoryQuestOne.GenerateIntroDialog" event="create"/>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_0vfqwij</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:exclusiveGateway id="ExclusiveGateway_0j4g5e3" name="Go to Break up&#xA;the fight">
+    <bpmn2:exclusiveGateway id="ExclusiveGateway_0j4g5e3" name="Do you want to&#xD;&#xA; Help The guy?">
       <bpmn2:incoming>SequenceFlow_0vfqwij</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1lp8lyd</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_0p961s3</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_0vfqwij" sourceRef="UserTask_17burh1" targetRef="ExclusiveGateway_0j4g5e3"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_1lp8lyd" name="No" sourceRef="ExclusiveGateway_0j4g5e3" targetRef="CallActivity_1uiix99"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_0p961s3" name="Yes" sourceRef="ExclusiveGateway_0j4g5e3" targetRef="UserTask_0c15z6l"/>
-    <bpmn2:userTask id="UserTask_0c15z6l" name="Breaking up fight options">
+    <bpmn2:sequenceFlow id="SequenceFlow_1lp8lyd" name="No" sourceRef="ExclusiveGateway_0j4g5e3" targetRef="CallActivity_1uiix99">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{characterChoice=='Keep Moving'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_0p961s3" name="Yes" sourceRef="ExclusiveGateway_0j4g5e3" targetRef="UserTask_0c15z6l">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{characterChoice=='Help'}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:userTask id="UserTask_0c15z6l" name="Pick a way to save the guy!">
       <bpmn2:incoming>SequenceFlow_0p961s3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1ku1ovg</bpmn2:outgoing>
     </bpmn2:userTask>
@@ -22,7 +29,7 @@
       <bpmn2:incoming>SequenceFlow_1ku1ovg</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1x3li92</bpmn2:outgoing>
     </bpmn2:serviceTask>
-    <bpmn2:exclusiveGateway id="ExclusiveGateway_01qzvm0" name="Was fight broken up?">
+    <bpmn2:exclusiveGateway id="ExclusiveGateway_01qzvm0" name="Did you save the guy?">
       <bpmn2:incoming>SequenceFlow_1x3li92</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1v19060</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_0qgadyv</bpmn2:outgoing>
@@ -36,19 +43,15 @@
     </bpmn2:userTask>
     <bpmn2:callActivity id="CallActivity_1q28nix" name="Fight Thug">
       <bpmn2:incoming>SequenceFlow_0qgadyv</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_1st43wn</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_146em6a</bpmn2:outgoing>
     </bpmn2:callActivity>
     <bpmn2:callActivity id="CallActivity_1uiix99" name="Fight Thug">
       <bpmn2:incoming>SequenceFlow_1lp8lyd</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_0xmc1ua</bpmn2:outgoing>
     </bpmn2:callActivity>
-    <bpmn2:sequenceFlow id="SequenceFlow_1st43wn" sourceRef="CallActivity_1q28nix" targetRef="UserTask_0dttkx6"/>
-    <bpmn2:endEvent id="EndEvent_1mi7pf5" name="Make a cup of tea!">
-      <bpmn2:incoming>SequenceFlow_1ucalmj</bpmn2:incoming>
-    </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_1ucalmj" sourceRef="UserTask_0plwjpu" targetRef="EndEvent_1mi7pf5"/>
     <bpmn2:userTask id="UserTask_0dttkx6" name="Celebrate with a pint">
-      <bpmn2:incoming>SequenceFlow_1st43wn</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_1m8fu6w</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1mtpgpa</bpmn2:outgoing>
     </bpmn2:userTask>
     <bpmn2:endEvent id="EndEvent_1f9x0ws" name="Hangover Time">
@@ -60,14 +63,33 @@
       <bpmn2:incoming>SequenceFlow_0xmc1ua</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1h9vju8</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:endEvent id="EndEvent_0oyhred" name="End Adventure">
-      <bpmn2:incoming>SequenceFlow_1h9vju8</bpmn2:incoming>
-    </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_1h9vju8" sourceRef="UserTask_16ypamv" targetRef="EndEvent_0oyhred"/>
     <bpmn2:startEvent id="StartEvent_1">
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_1" name="" sourceRef="StartEvent_1" targetRef="UserTask_17burh1"/>
+    <bpmn2:exclusiveGateway id="ExclusiveGateway_0d0gx38" name="Did you win?">
+      <bpmn2:incoming>SequenceFlow_146em6a</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1m8fu6w</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_0v96s2j</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_146em6a" sourceRef="CallActivity_1q28nix" targetRef="ExclusiveGateway_0d0gx38"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_1m8fu6w" name="Yes" sourceRef="ExclusiveGateway_0d0gx38" targetRef="UserTask_0dttkx6"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_0v96s2j" name="No" sourceRef="ExclusiveGateway_0d0gx38" targetRef="UserTask_0uxrvhg"/>
+    <bpmn2:endEvent id="EndEvent_0hap5k9" name="You are useless">
+      <bpmn2:incoming>SequenceFlow_1hs4i79</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_1hs4i79" sourceRef="UserTask_0uxrvhg" targetRef="EndEvent_0hap5k9"/>
+    <bpmn2:userTask id="UserTask_0uxrvhg" name="Be Made fun of">
+      <bpmn2:incoming>SequenceFlow_0v96s2j</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1hs4i79</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:endEvent id="EndEvent_0oyhred" name="End Adventure">
+      <bpmn2:incoming>SequenceFlow_1h9vju8</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:endEvent id="EndEvent_1mi7pf5" name="Make a cup of tea!">
+      <bpmn2:incoming>SequenceFlow_1ucalmj</bpmn2:incoming>
+    </bpmn2:endEvent>
     <bpmn2:textAnnotation id="TextAnnotation_1o5nfbi">
       <bpmn2:text>The user will be asked if he wants to break up a fight</bpmn2:text>
     </bpmn2:textAnnotation>
@@ -171,40 +193,33 @@
       <bpmndi:BPMNShape id="CallActivity_1uiix99_di" bpmnElement="CallActivity_1uiix99">
         <dc:Bounds height="80.0" width="100.0" x="885.329" y="46.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1st43wn_di" bpmnElement="SequenceFlow_1st43wn">
-        <di:waypoint xsi:type="dc:Point" x="1484.0" y="467.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1566.0" y="467.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="20.0" width="90.0" x="1480.0" y="457.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_1mi7pf5_di" bpmnElement="EndEvent_1mi7pf5">
-        <dc:Bounds height="36.0" width="36.0" x="1745.329" y="197.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="1597.0" y="198.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="20.0" width="90.0" x="1718.329" y="233.0"/>
+          <dc:Bounds height="22.0" width="113.0" x="1559.0" y="234.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1ucalmj_di" bpmnElement="SequenceFlow_1ucalmj">
         <di:waypoint xsi:type="dc:Point" x="1484.0" y="215.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1745.0" y="215.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1597.0" y="216.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="20.0" width="90.0" x="1491.5" y="205.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="1536.0" y="205.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_0dttkx6_di" bpmnElement="UserTask_0dttkx6">
-        <dc:Bounds height="80.0" width="100.0" x="1566.329" y="427.0"/>
+        <dc:Bounds height="80.0" width="100.0" x="1696.0" y="427.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1f9x0ws_di" bpmnElement="EndEvent_1f9x0ws">
-        <dc:Bounds height="36.0" width="36.0" x="1745.329" y="449.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="1897.0" y="449.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="20.0" width="90.0" x="1718.329" y="485.0"/>
+          <dc:Bounds height="20.0" width="90.0" x="1870.0" y="485.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1mtpgpa_di" bpmnElement="SequenceFlow_1mtpgpa">
-        <di:waypoint xsi:type="dc:Point" x="1666.0" y="467.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1745.0" y="467.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1796.0" y="467.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1897.0" y="467.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="20.0" width="90.0" x="1660.5" y="457.0"/>
+          <dc:Bounds height="20.0" width="90.0" x="1813.0" y="457.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0xmc1ua_di" bpmnElement="SequenceFlow_0xmc1ua">
@@ -218,22 +233,66 @@
         <dc:Bounds height="80.0" width="100.0" x="1107.329" y="46.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_0oyhred_di" bpmnElement="EndEvent_0oyhred">
-        <dc:Bounds height="36.0" width="36.0" x="1745.0" y="68.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="1323.0" y="68.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="20.0" width="90.0" x="1718.0" y="104.0"/>
+          <dc:Bounds height="22.0" width="90.0" x="1296.0" y="104.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1h9vju8_di" bpmnElement="SequenceFlow_1h9vju8">
         <di:waypoint xsi:type="dc:Point" x="1207.0" y="86.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1745.0" y="86.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1323.0" y="86.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="20.0" width="90.0" x="1328.5" y="76.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="1265.0" y="86.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="_BPMNShape_StartEvent_5" targetElement="UserTask_17burh1_di">
         <di:waypoint xsi:type="dc:Point" x="348.0" y="215.0"/>
         <di:waypoint xsi:type="dc:Point" x="543.0" y="215.0"/>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0d0gx38_di" bpmnElement="ExclusiveGateway_0d0gx38" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="1547.0" y="442.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="1527.0" y="424.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_146em6a_di" bpmnElement="SequenceFlow_146em6a">
+        <di:waypoint xsi:type="dc:Point" x="1484.0" y="467.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1547.0" y="467.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="1470.5" y="457.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1m8fu6w_di" bpmnElement="SequenceFlow_1m8fu6w">
+        <di:waypoint xsi:type="dc:Point" x="1597.0" y="467.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1696.0" y="467.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="1581.5" y="442.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0v96s2j_di" bpmnElement="SequenceFlow_0v96s2j">
+        <di:waypoint xsi:type="dc:Point" x="1572.0" y="492.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1572.0" y="609.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1696.0" y="609.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="1544.0" y="504.5"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0hap5k9_di" bpmnElement="EndEvent_0hap5k9">
+        <dc:Bounds height="36.0" width="36.0" x="1897.0" y="591.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="1870.0" y="627.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1hs4i79_di" bpmnElement="SequenceFlow_1hs4i79">
+        <di:waypoint xsi:type="dc:Point" x="1796.0" y="609.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1897.0" y="609.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="1801.5" y="599.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0uxrvhg_di" bpmnElement="UserTask_0uxrvhg">
+        <dc:Bounds height="80.0" width="100.0" x="1696.0" y="569.0"/>
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn2:definitions>
