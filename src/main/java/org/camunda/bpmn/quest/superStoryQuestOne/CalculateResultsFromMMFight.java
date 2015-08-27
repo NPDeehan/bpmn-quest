@@ -44,13 +44,13 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 
 	private void generatKickStory() {
 		String storytext = "Well - like the brave warrior that you are - you kicked a man in the dick... I drops like a sack of potatoes and the rest of the "
-				+ "thugs scatter. You gain 15 experience points ";
+				+ "thugs scatter. You gain 55 experience points ";
 		
 		this.theStory = new StoryModel("Ohhh.. that looked bad",  storytext );
 		theStory.addOption("Continue");
 		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/nutskick.jpg");
 		
-		player.addExperiencePoints(15);
+		player.addExperiencePoints(55);
 		marketingGuySaved = true;
 		
 	}
@@ -59,13 +59,13 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 		if(player.getCharisma() > 59)
 		{
 			String storytext = "Maybe these poor thugs just needed someone to talk to because you manage to explain to them how"
-					+ " badly they're contributing to society and that maybe they should think about what they've done, which they do. You gain 15 experiecne for"
+					+ " badly they're contributing to society and that maybe they should think about what they've done, which they do. You gain 50 experiecne for"
 					+ " being so charasmatic ";
 			
 			this.theStory = new StoryModel("Let's just talk about this...",  storytext );
 			theStory.addOption("Continue");
 			
-			player.addExperiencePoints(15);
+			player.addExperiencePoints(50);
 			marketingGuySaved = true;
 			
 		}else{
