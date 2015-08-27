@@ -4,6 +4,8 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.delegate.TaskListener;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.camunda.bpmn.quest.CharacterCreator.CharacterModel;
 import org.camunda.bpmn.quest.CharacterCreator.StoryModel;
 
@@ -23,8 +25,10 @@ public class WaysOfSavingPM implements JavaDelegate {
 		if(charMod.getPerception()>60)
 			newStory.addOption("Kick their Leader in the Balls");
 		
-
-		execution.setVariable("storytext", storytext);
+		ObjectValue storySerialized =
+				Variables.objectValue(newStory).serializationDataFormat("application/json").create();
+		
+		execution.setVariable("storyText", storySerialized);
 		execution.setVariable("characterChoice", "Help");
 		
 	}
