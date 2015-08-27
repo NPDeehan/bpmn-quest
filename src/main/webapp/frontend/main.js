@@ -226,7 +226,7 @@ window.addEventListener('load', function(evt) {
 
     var inputFields = CURRENT_INPUTS;
     if(!creationCompleted) {
-      creationCompleted = true;
+
       var payload = {
         "value" : "{}",
         "type" : "Object",
@@ -235,16 +235,29 @@ window.addEventListener('load', function(evt) {
           "serializationDataFormat": "application/json"
         }
       }
+
+      var counter = 0;
       var val = JSON.parse(payload.value);
       for(var key in inputFields.inputMap) {
         var name = key.substr(key.indexOf('.')+1);
         if(name !== 'characterName') {
           val[name] = parseInt(inputFields.inputMap[key].value,10);
+          if(val[name] < 0 || !val[name]) {
+            window.alert('You have to assign a positive value for ' + name);
+            return;
+          }
+          counter += val[name];
         } else {
           val[name] = inputFields.inputMap[key].value
         }
       }
       payload.value = JSON.stringify(val);
+
+      if(counter > 350) {
+        window.alert('You can only assign 350 points in total');
+        return;
+      }
+      creationCompleted = true;
 
       // set the player name and display the player character
       document.getElementById('playerName').textContent = val.characterName;
