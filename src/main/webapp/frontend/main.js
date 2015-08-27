@@ -431,7 +431,11 @@ window.addEventListener('load', function(evt) {
             }
 
             addStory(jsonResponse.storyText.value, function() {
-              CURRENT_INPUTS = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
+              if(jsonResponse.editableFields) {
+                CURRENT_INPUTS = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
+              } else {
+                CURRENT_INPUTS = {};
+              }
 
               var heightBefore = document.getElementById('story').scrollHeight;
               document.getElementById('story').scrollTop = heightBefore;

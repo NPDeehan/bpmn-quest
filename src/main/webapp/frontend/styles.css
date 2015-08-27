@@ -22,22 +22,33 @@
 }
 
 #playerData {
-font-family: 'Pinyon Script', cursive;
+font-family: 'Fredericka the Great', cursive;
     font-weight: bold;
     font-size: 37px;
     position: absolute;
     margin-left: 20px;
     display: none;
+        border: 1px solid black;
+    padding: 10px;
+}
+
+#playerName {
+      border-bottom: 1px dotted black;
+}
+#enemyName {
+      border-bottom: 1px dotted black;
 }
 
 #enemyData {
-    font-family: 'Pinyon Script', cursive;
+    font-family: 'Fredericka the Great', cursive;
     font-weight: bold;
     font-size: 37px;
     position: absolute;
     margin-left: 20px;
     margin-top: 150px;
     display: none;
+        border: 1px solid black;
+    padding: 10px;
 }
 
 #actionLog li {
