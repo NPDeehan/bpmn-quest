@@ -59,6 +59,29 @@ window.addEventListener('load', function(evt) {
   var currentTask = '';
   var currentPIID = '';
 
+  var playerName = '';
+  var enemyName = '';
+  var playerHealth = 100;
+  var playerMaxHealth = 100;
+  var enemyHealth = 100;
+  var enemyMaxHealth = 100;
+
+  var updateHealthDisplay = function() {
+    document.getElementById('lifePoints').setAttribute('max', playerMaxHealth);
+    document.getElementById('lifePoints').setAttribute('value', playerHealth);
+
+    if(enemyName !== '') {
+      document.getElementById('enemyName').textContent = enemyName;
+      document.getElementById('enemyLifePoints').setAttribute('max', enemyMaxHealth);
+      document.getElementById('enemyLifePoints').setAttribute('value', enemyHealth);
+
+      document.getElementById('enemyData').style.display = 'initial';
+
+    } else {
+      document.getElementById('enemyData').style.display = 'none';
+    }
+  };
+
   var addStory = function(storyObject, callback) {
     var fightSpeed = 750;
     storyObject = JSON.parse(storyObject);
@@ -76,6 +99,18 @@ window.addEventListener('load', function(evt) {
 
           var heightBefore = document.getElementById('story').scrollHeight;
           document.getElementById('story').scrollTop = heightBefore;
+
+          // parse text to get the current lifePoints
+          if(storyObject.fightLog[i].indexOf('attacks '+playerName) !== -1) {
+            var lpsegment = storyObject.fightLog[i].substr(storyObject.fightLog[i].indexOf('leaving ') + 8);
+            playerHealth = parseInt(lpsegment, 10);
+            updateHealthDisplay();
+          } else {
+            var lpsegment = storyObject.fightLog[i].substr(storyObject.fightLog[i].indexOf('leaving ') + 8);
+            enemyHealth = parseInt(lpsegment, 10);
+            updateHealthDisplay();
+          }
+
         }, i * fightSpeed);
       })(i);
     }
@@ -174,6 +209,8 @@ window.addEventListener('load', function(evt) {
     return inputFields;
   };
 
+  var updateMaxPlayerHealth = false;
+
   // HACK HACK HACK
   var creationCompleted = false;
   var completeStep = function(decision) {
@@ -194,18 +231,24 @@ window.addEventListener('load', function(evt) {
       var val = JSON.parse(payload.value);
       for(var key in inputFields.inputMap) {
         var name = key.substr(key.indexOf('.')+1);
-        val[name] = inputFields.inputMap[key].value;
+        if(name !== 'characterName') {
+          val[name] = parseInt(inputFields.inputMap[key].value,10);
+        } else {
+          val[name] = inputFields.inputMap[key].value
+        }
       }
       payload.value = JSON.stringify(val);
 
       // set the player name and display the player character
       document.getElementById('playerName').textContent = val.characterName;
+      playerName = val.characterName;
       document.getElementById('playerData').style.display = 'initial';
 
       var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function() {
           if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+            updateMaxPlayerHealth = true;
             requestFirstTask();
           }
       };
@@ -283,6 +326,28 @@ window.addEventListener('load', function(evt) {
 
             console.log('done loading variables', jsonResponse);
 
+            if(updateMaxPlayerHealth) {
+              updateMaxPlayerHealth = false;
+              playerHealth = JSON.parse(jsonResponse.playerCharacter.value).lifePoints;
+              playerMaxHealth = JSON.parse(jsonResponse.playerCharacter.value).lifePoints;
+
+              updateHealthDisplay();
+            }
+
+            if(jsonResponse.thisMonster) {
+              var monsterInfo = JSON.parse(jsonResponse.thisMonster.value)
+              if(monsterInfo.lifePoints > 0) {
+                enemyName = monsterInfo.characterName;
+                enemyMaxHealth = monsterInfo.lifePoints;
+                enemyHealth = enemyMaxHealth;
+
+                updateHealthDisplay();
+              }
+
+            } else {
+              enemyName = '';
+              updateHealthDisplay();
+            }
 
             addStory(jsonResponse.storyText.value, function() {
               CURRENT_INPUTS = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);

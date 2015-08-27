@@ -29,6 +29,16 @@
   display: none;
 }
 
+#enemyData {
+  font-family: 'Pinyon Script', cursive;
+  font-weight: bold;
+  font-size: 37px;
+  position: absolute;
+  margin-left: 550px;
+  margin-top: 150px;
+  display: none;
+}
+
 #actionLog li {
   list-style: none
 }

@@ -55,7 +55,7 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 	}
 
 	private void generateTalkStory() {
-		if(player.getCharisma() > 60)
+		if(player.getCharisma() > 59)
 		{
 			String storytext = "Maybe these poor thugs just needed someone to talk to because you manage to explain to them how"
 					+ " badly they're contributing to society and that maybe they should think about what they've done, which they do. You gain 15 experiecne for"

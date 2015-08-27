@@ -2551,7 +2551,7 @@ function Dungeon(eventBus, elementRegistry){
 
   eventBus.on([ 'canvas.init' ], function(event){
     var uri = 'resources/bg.jpg';
-    event.viewport.image(uri, -200, -200);
+    event.viewport.image(uri);
   });
 
   function start() {
@@ -2605,19 +2605,13 @@ function Dungeon(eventBus, elementRegistry){
       }
 
       if (element.incoming && element.incoming !== []) {
-        var connection = element.incoming[0];
+        var connections = element.incoming;
 
-        if (connection && connection.id) {
-          show(connection.id);
-
-          if (is(connection.source, 'bpmn:Gateway')) {
-            show(connection.source.id);
-
-            if(connection.source.incoming && connection.source.incoming[0]) {
-              show(connection.source.incoming[0].id);
-            }
+        forEach(connections, function(connection) {
+          if (elementIds.indexOf(connection.source.id) !== -1){
+            show(connection.id);
           }
-        }
+        });
       }
     });
   }
