@@ -36,11 +36,21 @@ window.addEventListener('load', function(evt) {
       line.appendChild(elem);
       document.getElementById('story').appendChild(line);
     }
-/*
-    var line = document.createElement('li');
-    line.textContent = storyObject;
-    document.getElementById('story').appendChild(line);
-    */
+
+    // Decisions
+    // clear the button container
+    document.getElementById('buttonContainer').innerHTML = '';
+    for(var i = 0; i < storyObject.options.length; i++) {
+      var opt = storyObject.options[i];
+      var btn = document.createElement('button');
+      btn.textContent = opt;
+      (function(opt) {
+        btn.addEventListener('click', function() {
+          completeStep(opt);
+        });
+      })(opt);
+      document.getElementById('buttonContainer').appendChild(btn);
+    }
   };
 
   var createInputs = function(inputFields, variables) {
@@ -87,7 +97,10 @@ window.addEventListener('load', function(evt) {
 
   // HACK HACK HACK
   var creationCompleted = false;
-  var completeStep = function(inputFields) {
+  var completeStep = function(decision) {
+
+    console.log('you decided for', decision);
+
     var inputFields = CURRENT_INPUTS;
     if(!creationCompleted) {
       creationCompleted = true;
@@ -148,7 +161,12 @@ window.addEventListener('load', function(evt) {
             value: '',
             type: 'String',
             valueInfo: {}
-          }
+          };
+      val.decision = {
+        value: decision,
+        type: 'String',
+        valueInfo: {}
+      };
       //payload.value = JSON.stringify(val);
 
       var xmlhttp = new XMLHttpRequest();
@@ -171,10 +189,6 @@ window.addEventListener('load', function(evt) {
   };
 
   var CURRENT_INPUTS;
-
-  document.getElementById('continueButton').addEventListener('click', function() {
-    completeStep();
-  });
 
   var requestVariables = function() {
     var xmlhttp = new XMLHttpRequest();
