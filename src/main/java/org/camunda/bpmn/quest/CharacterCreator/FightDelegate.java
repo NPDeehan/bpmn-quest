@@ -15,12 +15,46 @@ public class FightDelegate implements JavaDelegate {
 		this.player = (CharacterModel) execution.getVariable("playerCharacter");
 		CharacterModel monster = (CharacterModel) execution.getVariable("thisMonster");	
 		
-		//CharacterModel monster = new CharacterModel("monster", "Monster", 50, 50, 50, 50, 50, 10, 10);
-		
 		FightResult result = fightToDeath (monster);
+		String fightOutcome = "";
+
+		StoryModel thisStory = new StoryModel();
+		thisStory.actionLog = result.getProtocol();
+
+		if (player.getLifePoints() < 1) {
+			// The Player has died
+			fightOutcome = "died";
+			thisStory.setTitle(monster.getCharacterName() + " has killed you!");
+			thisStory.setDescription("It was a fair fight and you lost, loser!");
+			thisStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/died.png");
+		} else {
+			// The Player has won
+			fightOutcome = "survived";
+			thisStory.setTitle("You've killed " + monster.getCharacterName() + "!");
+			thisStory.setDescription("It was a fair fight and you won, winner!");
+			thisStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/survived.png");
+
+			player.addExperiencePoints(monster.getExperiencePoints());
+		}
+		
+		// overwrite player in execution context to reflect lost lifepoints and gained experiencepoints
+		ObjectValue playerDataValue = Variables.objectValue(player)
+				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
+				  .create();		
+		execution.setVariable("playerCharacter", playerDataValue);
+		
+		
+		ObjectValue storySerial = Variables.objectValue(thisStory)
+				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
+				  .create();
+		
+		execution.setVariable("storyText", storySerial);
+
+		
+		
+		/* Legacy
 
 		int wonXP = 0;
-		String fightOutcome = "";
 		
 		if (player.getLifePoints() < 1) {
 			fightOutcome = "died";
@@ -29,47 +63,19 @@ public class FightDelegate implements JavaDelegate {
 			wonXP = monster.getExperiencePoints();
 			player.addExperiencePoints(wonXP);
 		}
+
 		execution.setVariable("fightOutcome", fightOutcome);
 		execution.setVariable("wonXP", wonXP);
-
-		// overwrite player in execution context to reflect lost lifepoints and gained experiencepoints
-		ObjectValue playerDataValue = Variables.objectValue(player)
-				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
-				  .create();		
-		execution.setVariable("playerCharacter", playerDataValue);
-
-		
 		ObjectValue resultDataValue = Variables.objectValue(result)
 				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
 				  .create();
 		
 		execution.setVariable("fightProtocol", resultDataValue);
 		
-		//Now we add the story part
-		StoryModel thisStory = new StoryModel();
-		if(fightOutcome.equals("died")){
-			thisStory = generateSadEnding();
-		}else {
-			thisStory = generateSuccess();
-		}
+		 */
 		
-		ObjectValue storySerial = Variables.objectValue(thisStory)
-				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
-				  .create();
-		
-		execution.setVariable("storyText", storySerial);
 	}
 	
-	private StoryModel generateSuccess() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private StoryModel generateSadEnding() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	// Fight until one character is dead, return the other as the winner 
 	private FightResult fightToDeath (CharacterModel monster) {
 		FightResult result = new FightResult();
