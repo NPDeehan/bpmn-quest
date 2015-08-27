@@ -27,6 +27,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 		
 		execution.setVariable("thisMonster", monsterDataValue);
 		
+		
 	}
 	
 	private List<MonsterModel> generateMonsterPool () {
