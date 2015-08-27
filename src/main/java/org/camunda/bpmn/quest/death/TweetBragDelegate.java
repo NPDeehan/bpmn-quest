@@ -17,7 +17,7 @@ public class TweetBragDelegate implements JavaDelegate {
 	public void execute(DelegateExecution execution) throws Exception {
 
 		CharacterModel player = (CharacterModel) execution.getVariable("playerCharacter");
-		String tweet = player.getCharacterName() + " has played #bpmQuest and reached " + player.getExperiencePoints() + ". Congratulation!";
+		String tweet = player.getCharacterName() + " has played #bpmnQuest and reached " + player.getExperiencePoints() + " Experience Points. Congratulations!";
 		
 		// Twitter Authentication with Demo User
 	    AccessToken accessToken = new AccessToken("220324559-jet1dkzhSOeDWdaclI48z5txJRFLCnLOK45qStvo", "B28Ze8VDucBdiE38aVQqTxOyPc7eHunxBVv7XgGim4say");
