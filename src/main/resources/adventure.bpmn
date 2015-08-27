@@ -61,6 +61,9 @@
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{fightMore}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:userTask id="UserTask_1lkce2d" name="Create Your Character">
+      <bpmn2:extensionElements>
+        <camunda:taskListener class="org.camunda.bpmn.quest.CharacterCreator.RecalulateLifePointsListener" event="complete"/>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_0s7sas1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1azjm57</bpmn2:outgoing>
     </bpmn2:userTask>
