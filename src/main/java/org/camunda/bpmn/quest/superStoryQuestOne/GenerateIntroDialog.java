@@ -27,8 +27,8 @@ public class GenerateIntroDialog implements JavaDelegate {
 				+ " something useful to society... or you could just gab some popcorn and watch the action! \n ";
 		
 		StoryModel newStory = new StoryModel(charMod.getCharacterName() + " finds a bit of trouble",  storytext );
-		newStory.addOption("Help");
-		newStory.addOption("Ignore");
+		newStory.addOption("Help!");
+		newStory.addOption("Laugh!");
 		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/thug.png");
 		
 	
