@@ -263,6 +263,11 @@ window.addEventListener('load', function(evt) {
         if(value) {
           input.value = value;
         }
+
+        input.addEventListener('keydown', function(evt) {
+          evt.stopPropagation();
+        });
+
         cell2.appendChild(input);
         row.appendChild(cell2);
 
