@@ -79,8 +79,8 @@ public class FightDelegate implements JavaDelegate {
 		
 		} while (defender.getLifePoints() > 0);
 			
-		result.setWinner(attacker);
-		result.setLoser(defender);
+		//result.setWinner(attacker);
+		//result.setLoser(defender);
 		
 		result.setRounds(rounds);
 		
