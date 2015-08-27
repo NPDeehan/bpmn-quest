@@ -4,6 +4,9 @@ window.addEventListener('load', function(evt) {
   var BpmnViewer = window.BpmnJS;
 
   var viewer = new BpmnViewer({ container: '#map' });
+  
+  //var serverUrl = "http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080";
+  var serverUrl = "http://localhost:8080";
 
   var MAIN_PROCESS_INSTANCE_ID;
 
@@ -20,7 +23,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-definition/key/adventure/xml', true);
+    xmlhttp.open('GET', serverUrl + '/engine-rest/process-definition/key/adventure/xml', true);
 
     xmlhttp.setRequestHeader('Content-type', 'application/json');
 
@@ -253,7 +256,7 @@ window.addEventListener('load', function(evt) {
           }
       };
 
-      xmlhttp.open('POST', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/task/'+currentTask+'/complete', true);
+      xmlhttp.open('POST', serverUrl + '/engine-rest/task/'+currentTask+'/complete', true);
 
       xmlhttp.setRequestHeader('Content-type', 'application/json');
 
@@ -303,7 +306,7 @@ window.addEventListener('load', function(evt) {
           }
       };
 
-      xmlhttp.open('POST', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/task/'+currentTask+'/complete', true);
+      xmlhttp.open('POST', serverUrl + '/engine-rest/task/'+currentTask+'/complete', true);
 
       xmlhttp.setRequestHeader('Content-type', 'application/json');
 
@@ -363,7 +366,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-instance/'+currentPIID+'/variables/?deserializeValues=false', true);
+    xmlhttp.open('GET', serverUrl + '/engine-rest/process-instance/'+currentPIID+'/variables/?deserializeValues=false', true);
 
     xmlhttp.send();
 
@@ -397,7 +400,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/history/activity-instance?processInstanceId='+MAIN_PROCESS_INSTANCE_ID, true);
+    xmlhttp.open('GET', serverUrl + '/engine-rest/history/activity-instance?processInstanceId='+MAIN_PROCESS_INSTANCE_ID, true);
     xmlhttp.setRequestHeader('Content-type', 'application/json');
     xmlhttp.send();
   }
@@ -427,7 +430,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/task/?processInstanceBusinessKey='+GAME_ID, true);
+    xmlhttp.open('GET', serverUrl + '/engine-rest/task/?processInstanceBusinessKey='+GAME_ID, true);
 
     xmlhttp.send();
   };
@@ -449,7 +452,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('POST', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-definition/key/adventure/start', true);
+    xmlhttp.open('POST', serverUrl + '/engine-rest/process-definition/key/adventure/start', true);
 
     xmlhttp.setRequestHeader('Content-type', 'application/json');
 
