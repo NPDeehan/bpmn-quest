@@ -437,6 +437,8 @@ window.addEventListener('load', function(evt) {
                 CURRENT_INPUTS = {};
               }
 
+              document.getElementById('exp').innerText = JSON.parse(jsonResponse.playerCharacter.value).experiencePoints;
+
               var heightBefore = document.getElementById('story').scrollHeight;
               document.getElementById('story').scrollTop = heightBefore;
             });
