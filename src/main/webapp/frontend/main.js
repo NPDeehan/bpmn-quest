@@ -4,7 +4,7 @@ window.addEventListener('load', function(evt) {
   var BpmnViewer = window.BpmnJS;
 
   var viewer = new BpmnViewer({ container: '#map' });
-  
+
   //var serverUrl = "http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080";
   var serverUrl = "http://localhost:8080";
 
@@ -345,7 +345,9 @@ window.addEventListener('load', function(evt) {
               var monsterInfo = JSON.parse(jsonResponse.thisMonster.value)
               if(monsterInfo.lifePoints > 0) {
                 enemyName = monsterInfo.characterName;
-                enemyMaxHealth = monsterInfo.lifePoints;
+                if(enemyName !== monsterInfo.characterName) {
+                  enemyMaxHealth = monsterInfo.lifePoints;
+                }
                 enemyHealth = enemyMaxHealth;
 
                 updateHealthDisplay();
@@ -378,7 +380,6 @@ window.addEventListener('load', function(evt) {
 
 
   function getFootprints() {
-
 
     var xmlhttp = new XMLHttpRequest();
 
