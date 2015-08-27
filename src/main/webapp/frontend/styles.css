@@ -17,7 +17,7 @@
   height: 330px;
   border: 1px solid black;
   position: absolute;
-  background-image: url('resources/mapBackground.jpg');
+  background-color: #000;
 }
 
 #playerData {

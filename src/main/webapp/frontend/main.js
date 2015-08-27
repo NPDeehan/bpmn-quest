@@ -1,6 +1,42 @@
 window.addEventListener('load', function(evt) {
   'use strict';
 
+  var BpmnViewer = window.BpmnJS;
+
+  var viewer = new BpmnViewer({ container: '#map' });
+
+  function loadDiagram() {
+
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+          var jsonResponse = JSON.parse(xmlhttp.responseText);
+          var diagramXML = jsonResponse.bpmn20Xml;
+          importDiagram(diagramXML);
+        }
+    };
+
+    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/process-definition/key/adventure/xml', true);
+
+    xmlhttp.setRequestHeader('Content-type', 'application/json');
+
+    xmlhttp.send();
+
+    function importDiagram(diagram) {
+      viewer.importXML(diagram, function(err) {
+        if (!err) {
+          console.log('diagram loaded!');
+          viewer.get('canvas').zoom('fit-viewport');
+          viewer.get('dungeon').hideAll();
+        } else {
+          console.log('something went wrong:', err);
+        }
+      });
+    }
+  }
+
+
   var useAlternativeLandingPage = Math.random() < .05;
   if(useAlternativeLandingPage) {
     document.getElementById('landingPage').style.backgroundImage = "url('resources/alternativeLandingPageDark.jpg')";
@@ -217,7 +253,7 @@ window.addEventListener('load', function(evt) {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
           if(xmlhttp.status == 200){
             console.log('done', xmlhttp);
-
+            loadDiagram();
             requestFirstTask();
           } else {
             console.log('error', xmlhttp);
