@@ -2508,11 +2508,13 @@ var CommandInterceptor = _dereq_(40);
 
 function Dungeon(eventBus, elementRegistry){
 
+  var self = this;
 
   eventBus.on([ 'shape.added' ], function(event) {
     var element = event.element,
         gfx = event.gfx;
 
+    console.log(self);
 
     if (element.type === 'label') {
       return;
@@ -2556,6 +2558,21 @@ function Dungeon(eventBus, elementRegistry){
     event.viewport.image(uri, -200, -200);
   });
 
+  function start() {
+
+    hideAll();
+
+    var elements = elementRegistry.filter(function(element){
+      if (is(element, 'bpmn:StartEvent') && element.parent.type === 'bpmn:Process'){
+        return true;
+      }
+    });
+
+    forEach(elements, function(element) {
+      show(element.id);
+    });
+  }
+
   function show(elementId) {
     var gfx = elementRegistry.getGraphics(elementId);
     gfx.attr('display', 'inline');
@@ -2568,8 +2585,7 @@ function Dungeon(eventBus, elementRegistry){
 
   function hideAll() {
     var allElements = elementRegistry.filter(function(element){
-      return !is(element, 'bpmn:Process') &&
-             !is(element, 'bpmn:StartEvent');
+      return !is(element, 'bpmn:Process');
     });
 
     forEach(allElements, function(element) {
@@ -2577,7 +2593,7 @@ function Dungeon(eventBus, elementRegistry){
     });
   }
 
-  function showElements(taskIds) {
+  function showTasks(taskIds) {
 
     forEach(taskIds, function(id) {
 
@@ -2612,8 +2628,10 @@ function Dungeon(eventBus, elementRegistry){
   }
 
   this.hideAll = hideAll;
-  this.showElements = showElements;
+  this.showTasks = showTasks;
+  this.showElement = show;
   this.showNext = showNext;
+  this.start = start;
 }
 
 Dungeon.$inject = [ 'eventBus', 'elementRegistry' ];

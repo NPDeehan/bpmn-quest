@@ -27,8 +27,7 @@ window.addEventListener('load', function(evt) {
       viewer.importXML(diagram, function(err) {
         if (!err) {
           console.log('diagram loaded!');
-          viewer.get('canvas').zoom('fit-viewport');
-          viewer.get('dungeon').hideAll();
+          viewer.get('dungeon').start();
         } else {
           console.log('something went wrong:', err);
         }
