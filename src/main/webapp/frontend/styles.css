@@ -135,8 +135,8 @@ input[type="text"] {
   border-radius: 28px;
   font-family: Georgia;
   color: #ffffff;
-  font-size: 20px;
-  padding: 10px 20px 10px 20px;
+  font-size: 14px;
+  padding: 5px 10px 5px 10px;
   text-decoration: none;
   border-color: black;
   cursor: pointer;
@@ -152,4 +152,5 @@ input[type="text"] {
   position: absolute;
   bottom: 25px;
   margin-left: 39px;
+  width: 900px;
 }

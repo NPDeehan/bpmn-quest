@@ -87,6 +87,8 @@ window.addEventListener('load', function(evt) {
       })(opt);
       document.getElementById('buttonContainer').appendChild(btn);
     }
+
+    // need to recalculate the height of the story container because the decisions can be huge
   };
 
   var createInputs = function(inputFields, variables) {
