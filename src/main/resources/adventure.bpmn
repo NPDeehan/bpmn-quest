@@ -18,6 +18,7 @@
       <bpmn2:extensionElements>
         <camunda:in variables="all"/>
         <camunda:out variables="all"/>
+        <camunda:in businessKey="#{execution.processBusinessKey}"/>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
@@ -36,9 +37,9 @@
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_6" name="" sourceRef="UserTask_1" targetRef="ExclusiveGateway_3"/>
     <bpmn2:endEvent id="EndEvent_1">
-      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_1bbs9bh</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:sequenceFlow id="SequenceFlow_7" name="no" sourceRef="ExclusiveGateway_3" targetRef="EndEvent_1">
+    <bpmn2:sequenceFlow id="SequenceFlow_7" name="no" sourceRef="ExclusiveGateway_3" targetRef="CallActivity_02zh42k">
       <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!fightMore}</bpmn2:conditionExpression>
     </bpmn2:sequenceFlow>
     <bpmn2:sequenceFlow id="SequenceFlow_8" name="yes" sourceRef="ExclusiveGateway_3" targetRef="ExclusiveGateway_2">
@@ -74,6 +75,16 @@
       <bpmn2:incoming>SequenceFlow_0s7sas1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1azjm57</bpmn2:outgoing>
     </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_1bbs9bh" sourceRef="CallActivity_02zh42k" targetRef="EndEvent_1"/>
+    <bpmn2:callActivity id="CallActivity_02zh42k" name="Story" calledElement="story-adventure-one">
+      <bpmn2:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}"/>
+        <camunda:in variables="all"/>
+        <camunda:out variables="all"/>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1bbs9bh</bpmn2:outgoing>
+    </bpmn2:callActivity>
   </bpmn2:process>
   <bpmn2:error id="Error_1" errorCode="playerDied" name="Player died"/>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -128,14 +139,14 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_32" bpmnElement="EndEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="1056.0" y="124.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="1243.0" y="124.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="20.0" width="90.0" x="1029.0" y="160.0"/>
+          <dc:Bounds height="20.0" width="90.0" x="1216.0" y="160.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="_BPMNShape_ExclusiveGateway_6" targetElement="_BPMNShape_EndEvent_32">
         <di:waypoint xsi:type="dc:Point" x="1006.0" y="142.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1056.0" y="142.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1080.0" y="142.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="20.0" width="90.0" x="986.0" y="132.0"/>
         </bpmndi:BPMNLabel>
@@ -211,6 +222,16 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_1lkce2d_di" bpmnElement="UserTask_1lkce2d">
         <dc:Bounds height="80.0" width="100.0" x="377.0" y="102.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1bbs9bh_di" bpmnElement="SequenceFlow_1bbs9bh">
+        <di:waypoint xsi:type="dc:Point" x="1180.0" y="142.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1243.0" y="142.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="20.0" width="90.0" x="1166.5" y="132.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="CallActivity_02zh42k_di" bpmnElement="CallActivity_02zh42k">
+        <dc:Bounds height="80.0" width="100.0" x="1079.667" y="102.0"/>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

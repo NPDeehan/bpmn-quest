@@ -39,7 +39,7 @@ public class CreateCharacterDelegate implements JavaDelegate {
 		
 		String editableFields = nefUtil.getEditableFieldsInJson(fields, "playerCharacter");
 		
-		System.out.println(editableFields);
+		//System.out.println(editableFields);
 		
 		execution.setVariable("storyText", storyText);
 		

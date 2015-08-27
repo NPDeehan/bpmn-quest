@@ -13,6 +13,7 @@ public class CharacterModel implements Serializable {
 	
 	String id;
 	
+	
 	int experiencePoints;
 	
 	int lifePoints = 50;
