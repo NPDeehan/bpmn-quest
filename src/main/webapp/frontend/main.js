@@ -171,6 +171,10 @@ window.addEventListener('load', function(evt) {
       }
       payload.value = JSON.stringify(val);
 
+      // set the player name and display the player character
+      document.getElementById('playerName').textContent = val.characterName;
+      document.getElementById('playerData').style.display = 'initial';
+
       var xmlhttp = new XMLHttpRequest();
 
       xmlhttp.onreadystatechange = function() {
@@ -252,12 +256,12 @@ window.addEventListener('load', function(evt) {
 
             console.log('done loading variables', jsonResponse);
 
-            var heightBefore = document.getElementById('story').scrollHeight;
 
             addStory(jsonResponse.storyText.value);
 
             CURRENT_INPUTS = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
 
+            var heightBefore = document.getElementById('story').scrollHeight;
             document.getElementById('story').scrollTop = heightBefore;
 
           } else {
