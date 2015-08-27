@@ -4,7 +4,7 @@ window.addEventListener('load', function(evt) {
   var BpmnViewer = window.BpmnJS;
 
   var viewer = new BpmnViewer({ container: '#map' });
-  
+
   //var serverUrl = "http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080";
   var serverUrl = "http://localhost:8080";
 
@@ -226,7 +226,7 @@ window.addEventListener('load', function(evt) {
 
     var inputFields = CURRENT_INPUTS;
     if(!creationCompleted) {
-      creationCompleted = true;
+
       var payload = {
         "value" : "{}",
         "type" : "Object",
@@ -235,16 +235,29 @@ window.addEventListener('load', function(evt) {
           "serializationDataFormat": "application/json"
         }
       }
+
+      var counter = 0;
       var val = JSON.parse(payload.value);
       for(var key in inputFields.inputMap) {
         var name = key.substr(key.indexOf('.')+1);
         if(name !== 'characterName') {
           val[name] = parseInt(inputFields.inputMap[key].value,10);
+          if(val[name] < 0 || !val[name]) {
+            window.alert('You have to assign a positive value for ' + name);
+            return;
+          }
+          counter += val[name];
         } else {
           val[name] = inputFields.inputMap[key].value
         }
       }
       payload.value = JSON.stringify(val);
+
+      if(counter > 350) {
+        window.alert('You can only assign 350 points in total');
+        return;
+      }
+      creationCompleted = true;
 
       // set the player name and display the player character
       document.getElementById('playerName').textContent = val.characterName;
@@ -345,7 +358,9 @@ window.addEventListener('load', function(evt) {
               var monsterInfo = JSON.parse(jsonResponse.thisMonster.value)
               if(monsterInfo.lifePoints > 0) {
                 enemyName = monsterInfo.characterName;
-                enemyMaxHealth = monsterInfo.lifePoints;
+                if(enemyName !== monsterInfo.characterName) {
+                  enemyMaxHealth = monsterInfo.lifePoints;
+                }
                 enemyHealth = enemyMaxHealth;
 
                 updateHealthDisplay();
@@ -378,7 +393,6 @@ window.addEventListener('load', function(evt) {
 
 
   function getFootprints() {
-
 
     var xmlhttp = new XMLHttpRequest();
 

@@ -1,5 +1,8 @@
 package org.camunda.bpmn.quest.death;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.Variables;
@@ -16,8 +19,14 @@ public class TweetBragDelegate implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 
+		Date date = new Date();
+		SimpleDateFormat dt = new SimpleDateFormat("dd MM hh:mm");
+		String dateString = dt.format(date);
+		
 		CharacterModel player = (CharacterModel) execution.getVariable("playerCharacter");
-		String tweet = player.getCharacterName() + " has played #bpmnQuest and reached " + player.getExperiencePoints() + " Experience Points. Congratulations!";
+		String tweet = player.getCharacterName() + " has played #bpmnQuest and reached " + player.getExperiencePoints() + " XP. " + dateString;
+		
+		System.out.println ("now tweeting: " + tweet);
 		
 		// Twitter Authentication with Demo User
 	    AccessToken accessToken = new AccessToken("220324559-jet1dkzhSOeDWdaclI48z5txJRFLCnLOK45qStvo", "B28Ze8VDucBdiE38aVQqTxOyPc7eHunxBVv7XgGim4say");
