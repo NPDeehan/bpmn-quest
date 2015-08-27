@@ -46,27 +46,46 @@ public class FightDelegate implements JavaDelegate {
 		execution.setVariable("fightProtocol", resultDataValue);
 		
 		//Now we add the story part
-		StoryModel thisStory = new StoryModel();
-		if(fightOutcome.equals("died")){
-			thisStory = generateSadEnding();
-		}else {
-			thisStory = generateSuccess();
-		}
-		
-		ObjectValue storySerial = Variables.objectValue(thisStory)
-				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
-				  .create();
-		
-		execution.setVariable("storyText", storySerial);
+				StoryModel thisStory = new StoryModel();
+				if(fightOutcome.equals("died")){
+					thisStory = generateSadEnding(thisStory, monster);
+				}else {
+					thisStory = generateSuccess(thisStory, monster);
+				}
+				
+				ObjectValue storySerial = Variables.objectValue(thisStory)
+						  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
+						  .create();
+				
+				execution.setVariable("storyText", storySerial);
 	}
 	
-	private StoryModel generateSuccess() {
-		// TODO Auto-generated method stub
+	private StoryModel generateSuccess(StoryModel thisStory, CharacterModel monster) {
+		String title = "Well Done "+ this.player.getCharacterName() + "!";
+		
+		String story  = "Well it looks like you manage an unlikely victory over your apponent! /n "
+				+ "You've managed to get "+monster.getExperiencePoints() + " experience points, give you a grand total of"
+						+ this.player.getExperiencePoints() + " experience and your life total is at "+ this.player.getLifePoints();
+		
+		thisStory.setTitle(title);
+		thisStory.setDescription(story);
+		thisStory.addOption("Continue");
+
+		
 		return null;
 	}
 
-	private StoryModel generateSadEnding() {
-		// TODO Auto-generated method stub
+	private StoryModel generateSadEnding(StoryModel thisStory, CharacterModel monster) {
+		String title = "Remember "+ this.player.getCharacterName() + "? Well it turns out he's DEAD";
+		
+		String story  = "Thats right! you're dead!  /n "
+				+ "You've managed to get killed by "+monster.getCharacterName() + " and to be honest, we all expected you to do better. "
+						+ "you died with a total of "
+						+ this.player.getExperiencePoints() + " experience and in all likelihood you'll only be remembered for how easily you died. ";
+		
+		thisStory.setTitle(title);
+		thisStory.setDescription(story);
+		thisStory.addOption("Continue");
 		return null;
 	}
 
