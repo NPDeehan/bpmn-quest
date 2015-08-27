@@ -5,6 +5,7 @@ import static org.camunda.spin.Spin.JSON;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 
@@ -41,6 +42,24 @@ public class NameEditableFieldsUtil
 		    String newName = variableName + "." + myValue;
 		    
 		    nameWithField.put(newName, capitalize(myValue));
+ 
+		}
+		
+		 String json = JSON(nameWithField).toString();
+		    
+		 return json;
+		
+		
+	}
+	public String getEditableFieldsInJson(Map<String, String> fieldsListAndLables, String variableName)
+	{
+		HashMap<String, String> nameWithField = new HashMap<String, String>();
+		for (String myValue : fieldsListAndLables.keySet()) {
+			String lable = fieldsListAndLables.get(myValue);
+			
+		    String newName = variableName + "." + myValue;
+		    
+		    nameWithField.put(newName, lable);
  
 		}
 		
