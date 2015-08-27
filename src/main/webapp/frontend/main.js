@@ -78,6 +78,16 @@ window.addEventListener('load', function(evt) {
       document.getElementById('story').appendChild(line);
     }
 
+    // IMAGE
+    if(storyObject.picture && storyObject.picture !== '') {
+      var line = document.createElement('li');
+      var elem = document.createElement('img');
+      elem.setAttribute('src', storyObject.picture);
+      line.appendChild(elem);
+      line.style.textAlign = 'center';
+      document.getElementById('story').appendChild(line);
+    }
+
     // Decisions
     // clear the button container
     document.getElementById('buttonContainer').innerHTML = '';
