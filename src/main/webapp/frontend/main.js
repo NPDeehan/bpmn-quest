@@ -75,8 +75,16 @@ window.addEventListener('load', function(evt) {
     document.getElementById('landingPage').style.backgroundImage = "url('resources/alternativeLandingPageDark.jpg')";
     document.getElementById('gameContainer').style.backgroundImage = "url('resources/alternativeLandingPageDark.jpg')";
   } else {
-    document.getElementById('landingPage').style.backgroundImage = "url('resources/landingPageBackgroundDark.jpg')";
-    document.getElementById('gameContainer').style.backgroundImage = "url('resources/landingPageBackgroundDark.jpg')";
+
+    if(Math.random() < .01) {
+      document.getElementById('landingPage').style.backgroundImage = "url('resources/rare.jpg')";
+      document.getElementById('gameContainer').style.backgroundImage = "url('resources/rare.jpg')";
+      document.getElementById('gameName').innerText = "BEER Quest";
+      document.getElementById('gameName2').innerText = "BEER Quest";
+    } else {
+      document.getElementById('landingPage').style.backgroundImage = "url('resources/landingPageBackgroundDark.jpg')";
+      document.getElementById('gameContainer').style.backgroundImage = "url('resources/landingPageBackgroundDark.jpg')";
+    }
   }
 
   // replace bpmnio logo
