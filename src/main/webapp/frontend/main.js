@@ -15,10 +15,32 @@ window.addEventListener('load', function(evt) {
   var currentTask = '';
   var currentPIID = '';
 
-  var addLine = function(text) {
+  var addStory = function(storyObject) {
+    storyObject = JSON.parse(storyObject);
+    console.log('will add story', storyObject);
+
+    // HEAD
+    if(storyObject.title && storyObject.title !== '') {
+      var line = document.createElement('li');
+      var elem = document.createElement('h2');
+      elem.textContent = storyObject.title;
+      line.appendChild(elem);
+      document.getElementById('story').appendChild(line);
+    }
+
+    // Description
+    if(storyObject.description && storyObject.description !== '') {
+      var line = document.createElement('li');
+      var elem = document.createElement('span');
+      elem.textContent = storyObject.description;
+      line.appendChild(elem);
+      document.getElementById('story').appendChild(line);
+    }
+/*
     var line = document.createElement('li');
-    line.textContent = text;
+    line.textContent = storyObject;
     document.getElementById('story').appendChild(line);
+    */
   };
 
   var createInputs = function(inputFields, variables) {
@@ -166,7 +188,7 @@ window.addEventListener('load', function(evt) {
 
             var heightBefore = document.getElementById('story').scrollHeight;
 
-            addLine(jsonResponse.storyText.value);
+            addStory(jsonResponse.storyText.value);
 
             CURRENT_INPUTS = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
 
