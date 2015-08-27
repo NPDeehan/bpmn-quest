@@ -27,7 +27,6 @@ public class FightDelegate implements JavaDelegate {
 			fightOutcome = "died";
 			thisStory.setTitle(monster.getCharacterName() + " has killed you!");
 			thisStory.setDescription("It was a fair fight and you lost, loser!");
-			thisStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/died.png");
 		} else {
 			// The Player has won
 			fightOutcome = "survived";
