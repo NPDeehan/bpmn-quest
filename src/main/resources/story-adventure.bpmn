@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://activiti.org/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_yEP_wEw3EeWgiPmbFRGXNA" exporter="camunda modeler" exporterVersion="2.7.0" targetNamespace="http://activiti.org/bpmn">
-  <bpmn2:process id="superStory" isExecutable="true">
+  <bpmn2:process id="superStory" name="Supet Story Adventure" isExecutable="true">
     <bpmn2:userTask id="UserTask_17burh1" name="Read Opening Dialog">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_0vfqwij</bpmn2:outgoing>
@@ -87,9 +87,6 @@
     <bpmn2:endEvent id="EndEvent_0oyhred" name="End Adventure">
       <bpmn2:incoming>SequenceFlow_1h9vju8</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:endEvent id="EndEvent_1mi7pf5" name="Make a cup of tea!">
-      <bpmn2:incoming>SequenceFlow_1ucalmj</bpmn2:incoming>
-    </bpmn2:endEvent>
     <bpmn2:serviceTask id="ServiceTask_1" camunda:class="org.camunda.bpmn.quest.superStoryQuestOne.GenerateIntroDialog" name="Setup Stroy">
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
@@ -125,6 +122,9 @@
       <bpmn2:incoming>SequenceFlow_0v96s2j</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_13mgpfh</bpmn2:outgoing>
     </bpmn2:serviceTask>
+    <bpmn2:endEvent id="EndEvent_1mi7pf5" name="Make a cup of tea!">
+      <bpmn2:incoming>SequenceFlow_1ucalmj</bpmn2:incoming>
+    </bpmn2:endEvent>
     <bpmn2:textAnnotation id="TextAnnotation_1o5nfbi">
       <bpmn2:text>The user will be asked if he wants to break up a fight</bpmn2:text>
     </bpmn2:textAnnotation>
@@ -229,16 +229,16 @@
         <dc:Bounds height="80.0" width="100.0" x="990.0" y="46.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1mi7pf5_di" bpmnElement="EndEvent_1mi7pf5">
-        <dc:Bounds height="36.0" width="36.0" x="1792.0" y="198.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="1792.0" y="197.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="22.0" width="113.0" x="1754.0" y="234.0"/>
+          <dc:Bounds height="22.0" width="113.0" x="1754.0" y="233.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1ucalmj_di" bpmnElement="SequenceFlow_1ucalmj">
         <di:waypoint xsi:type="dc:Point" x="1679.0" y="215.0"/>
-        <di:waypoint xsi:type="dc:Point" x="1792.0" y="216.0"/>
+        <di:waypoint xsi:type="dc:Point" x="1792.0" y="215.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="90.0" x="1686.0" y="205.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="1731.0" y="205.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_0dttkx6_di" bpmnElement="UserTask_0dttkx6">

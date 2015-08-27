@@ -14,12 +14,34 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
+		
 		List<MonsterModel> monsters = generateMonsterPool();
+		String monsterNeeded = (String) execution.getVariable("requestedMonsterId");
 		
-		Random rn = new Random();
-		int randomNumber = rn.nextInt(4);
+		MonsterModel thisMonster = null;
 		
-		MonsterModel thisMonster = monsters.get(randomNumber);
+		if(monsterNeeded != null )
+		{
+			for(MonsterModel thisLovelyMonster : monsters)
+			{
+				if(thisLovelyMonster.getId().equals(monsterNeeded))
+				{
+					thisMonster = thisLovelyMonster;
+					break;
+				}
+			}
+					
+		}
+		
+		if(monsterNeeded == null)
+		{
+			Random rn = new Random();
+			int randomNumber = rn.nextInt(monsters.size());
+			
+			thisMonster = monsters.get(randomNumber);
+
+		}
+		
 		
 		ObjectValue monsterDataValue = Variables.objectValue(thisMonster)
 				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
@@ -42,6 +64,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				Variables.objectValue(story).serializationDataFormat("application/json").create();
 		
 		execution.setVariable("storyText", storySerialized);
+		execution.removeVariable("requestedMonsterId");
 		
 	}
 	
@@ -108,6 +131,21 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				100, // Experience Points
 				"a story about Lord Web's Fear \n People know that he's made of evil and say that if you say his name"
          		+ "3 times in a mirror he'll show up and why you're acting so stupid. He is very hard to install and really hurts a lot of peoples feelings! MURDER HIM!"
+				));
+		
+		monsters.add(new MonsterModel(
+				"thug",
+				"Thug",
+				50, // Strength
+				30, // Perception
+				20, // Endurance
+				30, // Charisma
+				30, // Intelligence
+				30, // Agility
+				50, // Luck
+				25, // Experience Points
+				"This is guy is what's wrong with the youth of today - or so you tell yourself, in reality you're just bitter about "
+				+ "being older and less spritly" // Monster Story
 				));
 		
 		return monsters;		
