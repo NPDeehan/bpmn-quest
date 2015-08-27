@@ -21,6 +21,11 @@ public class StoryModel implements Serializable {
 	
 		
 	
+	public StoryModel() {
+		super();
+	}
+
+
 	public StoryModel(String title, String description) {
 		super();
 		this.title = title;

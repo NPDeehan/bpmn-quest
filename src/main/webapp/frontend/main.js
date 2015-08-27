@@ -51,10 +51,42 @@ window.addEventListener('load', function(evt) {
   var currentTask = '';
   var currentPIID = '';
 
-  var addLine = function(text) {
-    var line = document.createElement('li');
-    line.textContent = text;
-    document.getElementById('story').appendChild(line);
+  var addStory = function(storyObject) {
+    storyObject = JSON.parse(storyObject);
+    console.log('will add story', storyObject);
+
+    // HEAD
+    if(storyObject.title && storyObject.title !== '') {
+      var line = document.createElement('li');
+      var elem = document.createElement('h2');
+      elem.textContent = storyObject.title;
+      line.appendChild(elem);
+      document.getElementById('story').appendChild(line);
+    }
+
+    // Description
+    if(storyObject.description && storyObject.description !== '') {
+      var line = document.createElement('li');
+      var elem = document.createElement('span');
+      elem.textContent = storyObject.description;
+      line.appendChild(elem);
+      document.getElementById('story').appendChild(line);
+    }
+
+    // Decisions
+    // clear the button container
+    document.getElementById('buttonContainer').innerHTML = '';
+    for(var i = 0; i < storyObject.options.length; i++) {
+      var opt = storyObject.options[i];
+      var btn = document.createElement('button');
+      btn.textContent = opt;
+      (function(opt) {
+        btn.addEventListener('click', function() {
+          completeStep(opt);
+        });
+      })(opt);
+      document.getElementById('buttonContainer').appendChild(btn);
+    }
   };
 
   var createInputs = function(inputFields, variables) {
@@ -101,7 +133,10 @@ window.addEventListener('load', function(evt) {
 
   // HACK HACK HACK
   var creationCompleted = false;
-  var completeStep = function(inputFields) {
+  var completeStep = function(decision) {
+
+    console.log('you decided for', decision);
+
     var inputFields = CURRENT_INPUTS;
     if(!creationCompleted) {
       creationCompleted = true;
@@ -162,7 +197,12 @@ window.addEventListener('load', function(evt) {
             value: '',
             type: 'String',
             valueInfo: {}
-          }
+          };
+      val.decision = {
+        value: decision,
+        type: 'String',
+        valueInfo: {}
+      };
       //payload.value = JSON.stringify(val);
 
       var xmlhttp = new XMLHttpRequest();
@@ -186,10 +226,6 @@ window.addEventListener('load', function(evt) {
 
   var CURRENT_INPUTS;
 
-  document.getElementById('continueButton').addEventListener('click', function() {
-    completeStep();
-  });
-
   var requestVariables = function() {
     var xmlhttp = new XMLHttpRequest();
 
@@ -202,7 +238,7 @@ window.addEventListener('load', function(evt) {
 
             var heightBefore = document.getElementById('story').scrollHeight;
 
-            addLine(jsonResponse.storyText.value);
+            addStory(jsonResponse.storyText.value);
 
             CURRENT_INPUTS = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
 

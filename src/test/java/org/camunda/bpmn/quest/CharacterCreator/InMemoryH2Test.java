@@ -7,6 +7,7 @@ import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 import org.camunda.bpm.engine.test.Deployment;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -40,6 +41,7 @@ public class InMemoryH2Test {
   /**
    * Just tests if the process definition is deployable.
    */
+  @Ignore
   @Test
   @Deployment(resources = {"adventure.bpmn", "fight.bpmn"})
   public void testParsingAndDeployment() {
@@ -70,6 +72,7 @@ public class InMemoryH2Test {
 	  
 	  
   }
+
   
   @Test
   @Deployment(resources = {"adventure.bpmn", "fight.bpmn"})
@@ -88,6 +91,7 @@ public class InMemoryH2Test {
 	    
 	    assertEquals("Create Your Character", task.getName());
 	    
+	    //StoryModel story = rule.getRuntimeService().getVariable(executionId, variableName)
 	    
 	    rule.getTaskService().complete(task.getId());
 

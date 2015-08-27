@@ -45,9 +45,31 @@ public class FightDelegate implements JavaDelegate {
 		
 		execution.setVariable("fightProtocol", resultDataValue);
 		
-	
+		//Now we add the story part
+		StoryModel thisStory = new StoryModel();
+		if(fightOutcome.equals("died")){
+			thisStory = generateSadEnding();
+		}else {
+			thisStory = generateSuccess();
+		}
+		
+		ObjectValue storySerial = Variables.objectValue(thisStory)
+				  .serializationDataFormat(Variables.SerializationDataFormats.JSON)
+				  .create();
+		
+		execution.setVariable("storyText", storySerial);
 	}
 	
+	private StoryModel generateSuccess() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private StoryModel generateSadEnding() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// Fight until one character is dead, return the other as the winner 
 	private FightResult fightToDeath (CharacterModel monster) {
 		FightResult result = new FightResult();
