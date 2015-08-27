@@ -2508,13 +2508,9 @@ var CommandInterceptor = _dereq_(40);
 
 function Dungeon(eventBus, elementRegistry){
 
-  var self = this;
-
   eventBus.on([ 'shape.added' ], function(event) {
     var element = event.element,
         gfx = event.gfx;
-
-    console.log(self);
 
     if (element.type === 'label') {
       return;
@@ -2575,7 +2571,9 @@ function Dungeon(eventBus, elementRegistry){
 
   function show(elementId) {
     var gfx = elementRegistry.getGraphics(elementId);
-    gfx.attr('display', 'inline');
+    if (gfx) {
+      gfx.attr('display', 'inline');
+    }
   }
 
   function hide(elementId) {
@@ -2593,22 +2591,32 @@ function Dungeon(eventBus, elementRegistry){
     });
   }
 
-  function showTasks(taskIds) {
+  function showElements(elementIds) {
 
-    forEach(taskIds, function(id) {
+    forEach(elementIds, function(id) {
 
       show(id);
 
       var element = elementRegistry.get(id);
 
-      if (element.incoming !== []) {
+      if (!element) {
+        console.log('element with id '+ id + ' not found!');
+        return;
+      }
+
+      if (element.incoming && element.incoming !== []) {
         var connection = element.incoming[0];
 
-        show(connection.id);
+        if (connection && connection.id) {
+          show(connection.id);
 
-        if (is(connection.source, 'bpmn:Gateway')) {
-          show(connection.source.id);
-          show(connection.source.incoming[0].id);
+          if (is(connection.source, 'bpmn:Gateway')) {
+            show(connection.source.id);
+
+            if(connection.source.incoming && connection.source.incoming[0]) {
+              show(connection.source.incoming[0].id);
+            }
+          }
         }
       }
     });
@@ -2628,10 +2636,12 @@ function Dungeon(eventBus, elementRegistry){
   }
 
   this.hideAll = hideAll;
-  this.showTasks = showTasks;
+  this.showElements = showElements;
   this.showElement = show;
   this.showNext = showNext;
   this.start = start;
+
+  console.log(this);
 }
 
 Dungeon.$inject = [ 'eventBus', 'elementRegistry' ];

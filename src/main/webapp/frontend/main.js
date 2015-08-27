@@ -5,6 +5,8 @@ window.addEventListener('load', function(evt) {
 
   var viewer = new BpmnViewer({ container: '#map' });
 
+  var MAIN_PROCESS_INSTANCE_ID;
+
   function loadDiagram() {
 
     var xmlhttp = new XMLHttpRequest();
@@ -14,6 +16,7 @@ window.addEventListener('load', function(evt) {
           var jsonResponse = JSON.parse(xmlhttp.responseText);
           var diagramXML = jsonResponse.bpmn20Xml;
           importDiagram(diagramXML);
+          requestFirstTask();
         }
     };
 
@@ -24,9 +27,10 @@ window.addEventListener('load', function(evt) {
     xmlhttp.send();
 
     function importDiagram(diagram) {
+      console.log('importing dungeon map');
       viewer.importXML(diagram, function(err) {
         if (!err) {
-          console.log('diagram loaded!');
+          console.log('dungeon map loaded!');
           viewer.get('dungeon').start();
         } else {
           console.log('something went wrong:', err);
@@ -272,6 +276,39 @@ window.addEventListener('load', function(evt) {
 
   };
 
+
+  function getFootprints() {
+
+
+    var xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+
+          var response = JSON.parse(xmlhttp.responseText);
+
+          var elementIds = [];
+
+          for (var i=0; i<response.length; i++) {
+
+            elementIds.push(response[i].id.split(':')[0]);
+
+
+          }
+          console.log(elementIds);
+          var dungeon = viewer.get('dungeon');
+
+          dungeon.hideAll();
+          dungeon.showElements(elementIds);
+
+        }
+    };
+
+    xmlhttp.open('GET', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/history/activity-instance?processInstanceId='+MAIN_PROCESS_INSTANCE_ID, true);
+    xmlhttp.setRequestHeader('Content-type', 'application/json');
+    xmlhttp.send();
+  }
+
   var requestFirstTask = function() {
     var xmlhttp = new XMLHttpRequest();
 
@@ -284,8 +321,9 @@ window.addEventListener('load', function(evt) {
             currentTask = jsonResponse[0].id;
             currentPIID = jsonResponse[0].processInstanceId;
 
-            // get the variables
+            getFootprints(currentPIID);
 
+            // get the variables
             requestVariables();
           } else {
             console.log('error loading character creation', xmlhttp);
@@ -305,8 +343,10 @@ window.addEventListener('load', function(evt) {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
           if(xmlhttp.status == 200){
             console.log('done', xmlhttp);
+
+            MAIN_PROCESS_INSTANCE_ID = JSON.parse(xmlhttp.responseText).id;
+
             loadDiagram();
-            requestFirstTask();
           } else {
             console.log('error', xmlhttp);
           }
