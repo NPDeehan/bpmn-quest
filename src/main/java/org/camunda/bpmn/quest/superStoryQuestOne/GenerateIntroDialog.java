@@ -29,7 +29,7 @@ public class GenerateIntroDialog implements JavaDelegate {
 		StoryModel newStory = new StoryModel(charMod.getCharacterName() + " finds a bit of trouble",  storytext );
 		newStory.addOption("Help");
 		newStory.addOption("Ignore");
-		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/thugs.png");
+		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/thug.png");
 		
 	
 		ObjectValue storySerialized =
