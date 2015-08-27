@@ -22,7 +22,6 @@ window.addEventListener('load', function(evt) {
   };
 
   var createInputs = function(inputFields, variables) {
-    console.log(inputFields);
     var table = document.createElement('table');
     for(var path in inputFields) {
       if (inputFields.hasOwnProperty(path)) {
@@ -34,7 +33,6 @@ window.addEventListener('load', function(evt) {
             value = JSON.parse(value.value);
           }
         }
-        console.log('creating input field for', path, 'with value', value);
 
         var row = document.createElement('tr');
         var label = document.createElement('td');
@@ -43,24 +41,28 @@ window.addEventListener('load', function(evt) {
 
         var cell2 = document.createElement('td');
         var input = document.createElement('input');
+        input.setAttribute('type', 'text');
         input.value = value;
         cell2.appendChild(input);
         row.appendChild(cell2);
 
-        document.getElementById('story').appendChild(row);
+        table.appendChild(row);
 
         inputFields.inputMap = inputFields.inputMap || {};
 
         inputFields.inputMap[path] = input;
       }
     }
+    var listElement = document.createElement('li');
+    listElement.appendChild(table);
+
+    document.getElementById('story').appendChild(listElement);
     return inputFields;
   };
 
   // HACK HACK HACK
   var creationCompleted = false;
   var completeStep = function(inputFields) {
-    console.log(inputFields);
 
     if(!creationCompleted) {
       creationCompleted = true;
@@ -78,7 +80,6 @@ window.addEventListener('load', function(evt) {
         val[name] = inputFields.inputMap[key].value;
       }
       payload.value = JSON.stringify(val);
-      console.log(payload);
 
       var xmlhttp = new XMLHttpRequest();
 
@@ -126,12 +127,8 @@ window.addEventListener('load', function(evt) {
 
             addLine(jsonResponse.storyText.value);
 
-            addLine('--');
-
             //TODO: do not use split
             var inputFields = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
-
-            addLine('--');
 
             addSubmitButton(inputFields);
 

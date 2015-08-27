@@ -105,3 +105,39 @@
   height: calc(100% - 40px);
   margin-top: 20px;
 }
+
+li {
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  color: white;
+  height: 23px;
+  width: 150px;
+  padding: 3px 5px 3px 5px;
+  border-style: none;
+  background-image: url(./resources/mapBackground.jpg);
+  font-family: courier new;
+  font-size: 14px;
+  border-radius: 7px;
+  border: 1px solid black;
+}
+
+#gameContainer button {
+  background: #d98f34;
+  background-image: -webkit-linear-gradient(top, #d98f34, #b84c2b);
+  background-image: -moz-linear-gradient(top, #d98f34, #b84c2b);
+  background-image: -ms-linear-gradient(top, #d98f34, #b84c2b);
+  background-image: -o-linear-gradient(top, #d98f34, #b84c2b);
+  background-image: linear-gradient(to bottom, #d98f34, #b84c2b);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  border-color: black;
+  cursor: pointer;
+}
