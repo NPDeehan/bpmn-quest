@@ -1,3 +1,7 @@
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+}
+
 window.addEventListener('load', function(evt) {
   'use strict';
 
@@ -5,8 +9,11 @@ window.addEventListener('load', function(evt) {
 
   var viewer = new BpmnViewer({ container: '#map' });
 
-  //var serverUrl = "http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080";
-  var serverUrl = "http://localhost:8080";
+  var serverUrl = "http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080";
+  //var serverUrl = "http://localhost:8080";
+
+	var processDefinitionKey = getURLParameter('game');
+	console.log(processDefinitionKey);
 
   var MAIN_PROCESS_INSTANCE_ID;
 
@@ -23,7 +30,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('GET', serverUrl + '/engine-rest/process-definition/key/adventure/xml', true);
+    xmlhttp.open('GET', serverUrl + '/engine-rest/process-definition/key/' + processDefinitionKey + '/xml', true);
 
     xmlhttp.setRequestHeader('Content-type', 'application/json');
 
@@ -470,7 +477,7 @@ window.addEventListener('load', function(evt) {
         }
     };
 
-    xmlhttp.open('POST', serverUrl + '/engine-rest/process-definition/key/adventure/start', true);
+    xmlhttp.open('POST', serverUrl + '/engine-rest/process-definition/key/' + processDefinitionKey + '/start', true);
 
     xmlhttp.setRequestHeader('Content-type', 'application/json');
 
