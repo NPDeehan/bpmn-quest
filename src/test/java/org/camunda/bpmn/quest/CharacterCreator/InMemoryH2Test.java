@@ -72,6 +72,7 @@ public class InMemoryH2Test {
 	  
 	  
   }
+
   
   @Test
   @Deployment(resources = {"adventure.bpmn", "fight.bpmn"})
