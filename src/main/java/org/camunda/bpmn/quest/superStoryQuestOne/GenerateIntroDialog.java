@@ -30,17 +30,17 @@ public class GenerateIntroDialog implements JavaDelegate {
 		
 	
 		// this is a map of fields that the user can edit 
-		// it contains the name of the variable and the name of the lable
-		Map<String, String> fields = new HashMap<String, String>();
-		fields.put("characterChoice", "Make your call");
-	
-		NameEditableFieldsUtil nefUtil = new NameEditableFieldsUtil();
-		
-		// this returns the json of the fields
-		String editableFields = nefUtil.getEditableFieldsInJson(fields, null);
-
-		
-		execution.setVariable("editableFields", editableFields);
+//		// it contains the name of the variable and the name of the lable
+//		Map<String, String> fields = new HashMap<String, String>();
+//		fields.put("characterChoice", "Make your call");
+//	
+//		NameEditableFieldsUtil nefUtil = new NameEditableFieldsUtil();
+//		
+//		// this returns the json of the fields
+//		String editableFields = nefUtil.getEditableFieldsInJson(fields, null);
+//
+//		
+//		execution.setVariable("editableFields", editableFields);
 		execution.setVariable("storytext", storytext);
 		execution.setVariable("characterChoice", "Help"); // this is a default that can be edited by the user
 		
