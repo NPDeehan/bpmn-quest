@@ -21,7 +21,7 @@ public class GameOfChanceDelegate implements JavaDelegate {
 		newStory.addOption("King");
 		newStory.addOption("Queen");
 		newStory.addOption("Ten");
-		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/card.png");
+		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/card.png");
 		
 	
 		ObjectValue storySerialized =

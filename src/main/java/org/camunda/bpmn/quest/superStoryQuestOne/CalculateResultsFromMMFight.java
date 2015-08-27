@@ -48,7 +48,7 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 		
 		this.theStory = new StoryModel("Ohhh.. that looked bad",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/nutskick.jpg");
+		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/nutskick.jpg");
 		
 		player.addExperiencePoints(15);
 		marketingGuySaved = true;
@@ -86,7 +86,7 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 		
 		this.theStory = new StoryModel("ATTACK!!",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/thugs.png");
+		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/thugs.png");
 		marketingGuySaved = false;
 		
 	}

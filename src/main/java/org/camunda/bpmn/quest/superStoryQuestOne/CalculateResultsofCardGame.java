@@ -2,6 +2,8 @@ package org.camunda.bpmn.quest.superStoryQuestOne;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.camunda.bpmn.quest.CharacterCreator.CharacterModel;
 import org.camunda.bpmn.quest.CharacterCreator.StoryModel;
 
@@ -29,6 +31,13 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 			generateRandomStory();
 		}
 		
+		theStory.addOption("Continue");
+		ObjectValue storySerialized =
+				Variables.objectValue(theStory).serializationDataFormat("application/json").create();
+		
+		execution.setVariable("storyText", storySerialized);
+
+		
 
 	}
 
@@ -50,7 +59,7 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 		
 		this.theStory = new StoryModel("Is THIS your card?...",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/money.png");
+		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/money.png");
 		
 		player.addExperiencePoints(15);
 
@@ -60,11 +69,11 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 	private void generateUnluckyStory()  
 	{
 		String storytext = "You make your guess and wait for your card to show up! - But you are SO unluckly that not only does your card not show up - but the room "
-				+ "bursts into flames... you mangage to escape.. but you take 5 damage";
+				+ "bursts into flames... you don't mangage to escape.. and you die :(";
 		
 		this.theStory = new StoryModel("Is THIS your... FIRE?...",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/fire.png");
+		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/fire.png");
 		
 		player.setLifePoints(player.getLifePoints() -5);
 
@@ -76,7 +85,7 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 		
 		this.theStory = new StoryModel("Is THIS your card?...",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/money.png");
+		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/money.png");
 		
 		player.addExperiencePoints(15);
 
