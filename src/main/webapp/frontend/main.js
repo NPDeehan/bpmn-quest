@@ -55,9 +55,28 @@ window.addEventListener('load', function(evt) {
   var currentTask = '';
   var currentPIID = '';
 
-  var addStory = function(storyObject) {
+  var addStory = function(storyObject, callback) {
+    var fightSpeed = 750;
     storyObject = JSON.parse(storyObject);
     console.log('will add story', storyObject);
+
+    // fight log
+    for(var i = 0; i < storyObject.fightLog.length; i++) {
+      (function(i) {
+        window.setTimeout(function() {
+          var line = document.createElement('li');
+          var elem = document.createElement('span');
+          elem.textContent = storyObject.fightLog[i];
+          line.appendChild(elem);
+          document.getElementById('story').appendChild(line);
+
+          var heightBefore = document.getElementById('story').scrollHeight;
+          document.getElementById('story').scrollTop = heightBefore;
+        }, i * fightSpeed);
+      })(i);
+    }
+
+    window.setTimeout(function() {
 
     // HEAD
     if(storyObject.title && storyObject.title !== '') {
@@ -88,8 +107,6 @@ window.addEventListener('load', function(evt) {
     }
 
     // Decisions
-    // clear the button container
-    document.getElementById('buttonContainer').innerHTML = '';
     for(var i = 0; i < storyObject.options.length; i++) {
       var opt = storyObject.options[i];
       var btn = document.createElement('button');
@@ -101,6 +118,12 @@ window.addEventListener('load', function(evt) {
       })(opt);
       document.getElementById('buttonContainer').appendChild(btn);
     }
+    var heightBefore = document.getElementById('story').scrollHeight;
+          document.getElementById('story').scrollTop = heightBefore;
+
+    callback();
+
+    }, storyObject.fightLog.length * fightSpeed + (storyObject.fightLog.length ? fightSpeed : 0));
 
     // need to recalculate the height of the story container because the decisions can be huge
   };
@@ -157,7 +180,7 @@ window.addEventListener('load', function(evt) {
     if(!creationCompleted) {
       creationCompleted = true;
       var payload = {
-        "value" : "{\"characterName\":\"Hero!\",\"id\":null,\"lifePoints\":1,\"strength\":50,\"perception\":50,\"endurance\":50,\"charisma\":50,\"inteligance\":50,\"agility\":50,\"luck\":50}",
+        "value" : "{}",
         "type" : "Object",
         "valueInfo" : {
           "objectTypeName": "org.camunda.bpmn.quest.CharacterCreator.CharacterModel",
@@ -257,12 +280,13 @@ window.addEventListener('load', function(evt) {
             console.log('done loading variables', jsonResponse);
 
 
-            addStory(jsonResponse.storyText.value);
+            addStory(jsonResponse.storyText.value, function() {
+              CURRENT_INPUTS = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
 
-            CURRENT_INPUTS = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
+              var heightBefore = document.getElementById('story').scrollHeight;
+              document.getElementById('story').scrollTop = heightBefore;
+            });
 
-            var heightBefore = document.getElementById('story').scrollHeight;
-            document.getElementById('story').scrollTop = heightBefore;
 
           } else {
             console.log('error loading variABLES', xmlhttp);
@@ -277,6 +301,9 @@ window.addEventListener('load', function(evt) {
   };
 
   var requestFirstTask = function() {
+    // clear the button container
+    document.getElementById('buttonContainer').innerHTML = '';
+
     var xmlhttp = new XMLHttpRequest();
 
     xmlhttp.onreadystatechange = function() {
