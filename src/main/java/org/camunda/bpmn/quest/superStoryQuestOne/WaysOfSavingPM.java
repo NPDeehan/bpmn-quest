@@ -18,7 +18,7 @@ public class WaysOfSavingPM implements JavaDelegate {
 				+ "";
 		
 		StoryModel newStory = new StoryModel(charMod.getCharacterName() + " wants to help!",  storytext );
-		newStory.addOption("Attack Then");
+		newStory.addOption("Attack Them");
 		newStory.addOption("Talk to Them");
 		if(charMod.getPerception()>60)
 			newStory.addOption("Kick their Leader in the Balls");
