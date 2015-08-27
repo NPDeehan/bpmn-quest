@@ -89,6 +89,7 @@
       <bpmn2:extensionElements>
         <camunda:in variables="all"/>
         <camunda:out variables="all"/>
+        <camunda:in businessKey="#{execution.processBusinessKey}"/>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_1azjm57</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>

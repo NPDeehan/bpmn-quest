@@ -43,7 +43,7 @@ public class MaterializeRiddleDelegate implements JavaDelegate {
 		
 		riddles.add(new Riddle(
 				"Which BPMN Event Type is only caught and never thrown?",
-				"The Error Event",
+				"The Timer Event",
 				"The Dramatic Event",
 				"The Error Event",
 				"The Timer Event",
