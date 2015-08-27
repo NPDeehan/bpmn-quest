@@ -29,6 +29,7 @@ window.addEventListener('load', function(evt) {
         var value = variables;
         for(var j = 0; j < pathParts.length; j++) {
           value = value[pathParts[j]];
+          if(!value) break;
           if(j === 0) {
             value = JSON.parse(value.value);
           }
@@ -42,7 +43,9 @@ window.addEventListener('load', function(evt) {
         var cell2 = document.createElement('td');
         var input = document.createElement('input');
         input.setAttribute('type', 'text');
-        input.value = value;
+        if(value) {
+          input.value = value;
+        }
         cell2.appendChild(input);
         row.appendChild(cell2);
 
@@ -63,7 +66,7 @@ window.addEventListener('load', function(evt) {
   // HACK HACK HACK
   var creationCompleted = false;
   var completeStep = function(inputFields) {
-
+    var inputFields = CURRENT_INPUTS;
     if(!creationCompleted) {
       creationCompleted = true;
       var payload = {
@@ -95,25 +98,61 @@ window.addEventListener('load', function(evt) {
 
       xmlhttp.send(JSON.stringify({
         variables: {
-          playerCharacter: payload
+          playerCharacter: payload,
+          editableFields: {
+            value: '{}',
+            type: 'String',
+            valueInfo: {}
+          },
+          storyText: {
+            value: '',
+            type: 'String',
+            valueInfo: {}
+          }
         }
+      }));
+    } else {
+      var val = {};
+      for(var key in inputFields.inputMap) {
+        var name = key;
+        val[name] = {value: inputFields.inputMap[key].value, type:'String' };
+      }
+      val.editableFields = {
+        value: '{}',
+        type: 'String',
+        valueInfo: {}
+      };
+      val.storyText = {
+            value: '',
+            type: 'String',
+            valueInfo: {}
+          }
+      //payload.value = JSON.stringify(val);
+
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+          if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+            requestFirstTask();
+          }
+      };
+
+      xmlhttp.open('POST', 'http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/engine-rest/task/'+currentTask+'/complete', true);
+
+      xmlhttp.setRequestHeader('Content-type', 'application/json');
+
+      xmlhttp.send(JSON.stringify({
+        variables: val
       }));
     }
 
   };
 
-  var addSubmitButton = function(inputFields) {
-    var row = document.createElement('li');
-    var button = document.createElement('button');
-    button.textContent = 'continue';
-    row.appendChild(button);
+  var CURRENT_INPUTS;
 
-    button.addEventListener('click', function() {
-      completeStep(inputFields);
-    });
-
-    document.getElementById('story').appendChild(row);
-  };
+  document.getElementById('continueButton').addEventListener('click', function() {
+    completeStep();
+  });
 
   var requestVariables = function() {
     var xmlhttp = new XMLHttpRequest();
@@ -125,12 +164,13 @@ window.addEventListener('load', function(evt) {
 
             console.log('done loading variables', jsonResponse);
 
+            var heightBefore = document.getElementById('story').scrollHeight;
+
             addLine(jsonResponse.storyText.value);
 
-            //TODO: do not use split
-            var inputFields = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
+            CURRENT_INPUTS = createInputs(JSON.parse(jsonResponse.editableFields.value), jsonResponse);
 
-            addSubmitButton(inputFields);
+            document.getElementById('story').scrollTop = heightBefore;
 
           } else {
             console.log('error loading variABLES', xmlhttp);

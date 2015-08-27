@@ -35,7 +35,7 @@
 
 #actionLog ul {
     overflow: auto;
-    height: calc( 100% - 485px);
+    height: calc( 100% - 545px);
     display: block;
     position: absolute;
     width: 900px;
@@ -140,4 +140,14 @@ input[type="text"] {
   text-decoration: none;
   border-color: black;
   cursor: pointer;
+
+  position: absolute;
+  bottom: 25px;
+  margin-left: 39px;
+}
+
+#gameContainer button.disabled {
+  background-image: linear-gradient(to bottom, #DEDEDE, #7D7D7D);
+  cursor: default;
+  color: black;
 }
