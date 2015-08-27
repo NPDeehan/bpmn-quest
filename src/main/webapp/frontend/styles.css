@@ -1,8 +1,8 @@
 #topContainer {
   height: 330px;
-  border-top: 1px dotted black;
   padding: 8px;
-  margin-top: -23px;
+  margin-top: 440px;
+  position: absolute;
 }
 
 #gameContainer h1 {
@@ -13,30 +13,31 @@
 }
 
 #map {
-  width: 500px;
-  height: 330px;
+  width: 600px;
+  height: 400px;
   border: 1px solid black;
   position: absolute;
   background-color: #000;
+  margin-left: 20px;
 }
 
 #playerData {
-  font-family: 'Pinyon Script', cursive;
-      font-weight: bold;
+font-family: 'Pinyon Script', cursive;
+    font-weight: bold;
     font-size: 37px;
-  position: absolute;
-  margin-left: 550px;
-  display: none;
+    position: absolute;
+    margin-left: 20px;
+    display: none;
 }
 
 #enemyData {
-  font-family: 'Pinyon Script', cursive;
-  font-weight: bold;
-  font-size: 37px;
-  position: absolute;
-  margin-left: 550px;
-  margin-top: 150px;
-  display: none;
+    font-family: 'Pinyon Script', cursive;
+    font-weight: bold;
+    font-size: 37px;
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 150px;
+    display: none;
 }
 
 #actionLog li {
@@ -45,10 +46,12 @@
 
 #actionLog ul {
     overflow: auto;
-    height: calc( 100% - 545px);
+    max-height: calc( 100% - 220px );
     display: block;
     position: absolute;
-    width: 900px;
+    width: 550px;
+    margin-left: 610px;
+    margin-top: 0;
 }
 
 #gameContainer{
@@ -110,7 +113,7 @@
 
 #containerOverlay {
   margin: auto;
-  width: 1024px;
+  width: 1224px;
   background-color: antiquewhite;
   height: calc(100% - 40px);
   margin-top: 20px;
@@ -118,6 +121,10 @@
 
 li {
   margin-bottom: 20px;
+}
+
+li img {
+  max-width: 500px;
 }
 
 input[type="text"] {
@@ -145,8 +152,8 @@ input[type="text"] {
   border-radius: 28px;
   font-family: Georgia;
   color: #ffffff;
-  font-size: 14px;
-  padding: 5px 10px 5px 10px;
+  font-size: 22px;
+  padding: 8px 15px 8px 15px;
   text-decoration: none;
   border-color: black;
   cursor: pointer;
@@ -159,10 +166,10 @@ input[type="text"] {
 }
 
 #buttonContainer {
-  position: absolute;
-  bottom: 25px;
-  margin-left: 39px;
-  width: 900px;
+position: absolute;
+    bottom: 25px;
+    margin-left: 635px;
+    width: 550px;
 }
 
 progress {

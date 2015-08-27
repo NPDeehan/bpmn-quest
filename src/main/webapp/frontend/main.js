@@ -133,7 +133,7 @@ window.addEventListener('load', function(evt) {
     if(storyObject.description && storyObject.description !== '') {
       var line = document.createElement('li');
       var elem = document.createElement('span');
-      elem.textContent = storyObject.description;
+      elem.innerHTML = storyObject.description;
       line.appendChild(elem);
       document.getElementById('story').appendChild(line);
     }
@@ -143,6 +143,10 @@ window.addEventListener('load', function(evt) {
       var line = document.createElement('li');
       var elem = document.createElement('img');
       elem.setAttribute('src', storyObject.picture);
+      elem.addEventListener('load', function() {
+          var heightBefore = document.getElementById('story').scrollHeight;
+          document.getElementById('story').scrollTop = heightBefore;
+      });
       line.appendChild(elem);
       line.style.textAlign = 'center';
       document.getElementById('story').appendChild(line);
