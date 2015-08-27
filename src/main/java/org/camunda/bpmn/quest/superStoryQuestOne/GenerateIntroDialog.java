@@ -22,11 +22,12 @@ public class GenerateIntroDialog implements JavaDelegate {
 				
 		String storytext = "As you make your way to a local pub for a well deserved drink you come accross a group of thugs beating up an innocent marketing manager."
 				+ "While gernally you're not to fond of marketing people, you feel maybe if you help he'll learn a lesson and perhaps re-skill to become"
-				+ " something useful to society... or you could just gab some popcorn and watch the action! \n "
-				+ "To help the marketing manager type 'Help' to ignore him type 'Keep Moving' ";
+				+ " something useful to society... or you could just gab some popcorn and watch the action! \n ";
 		
-		StoryModel newStory = new StoryModel(charMod.getCharacterName() + " finds a bit of trouble, storytext" );
-
+		StoryModel newStory = new StoryModel(charMod.getCharacterName() + "finds a bit of trouble",  storytext );
+		newStory.addOption("Help");
+		newStory.addOption("Ignore");
+		
 	
 		// this is a map of fields that the user can edit 
 		// it contains the name of the variable and the name of the lable
