@@ -28,7 +28,7 @@ public class WaysOfSavingPM implements JavaDelegate {
 		ObjectValue storySerialized =
 				Variables.objectValue(newStory).serializationDataFormat("application/json").create();
 		
-		execution.setVariable("storytext", storySerialized);
+		execution.setVariable("storyText", storySerialized);
 		execution.setVariable("characterChoice", "Help");
 		
 	}

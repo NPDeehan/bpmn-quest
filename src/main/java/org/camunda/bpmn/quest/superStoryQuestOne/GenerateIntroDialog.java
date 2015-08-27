@@ -29,15 +29,14 @@ public class GenerateIntroDialog implements JavaDelegate {
 		StoryModel newStory = new StoryModel(charMod.getCharacterName() + " finds a bit of trouble",  storytext );
 		newStory.addOption("Help");
 		newStory.addOption("Ignore");
-		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/thug.png");
+		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/thug.png");
 		
 	
 		ObjectValue storySerialized =
 				Variables.objectValue(newStory).serializationDataFormat("application/json").create();
 		
 		execution.setVariable("storyText", storySerialized);
-	
-		execution.setVariable("storytext", storytext);
+
 		execution.setVariable("characterChoice", "Help"); // this is a default that can be edited by the user
 		
 		

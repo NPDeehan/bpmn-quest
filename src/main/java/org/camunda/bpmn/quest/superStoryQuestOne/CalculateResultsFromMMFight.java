@@ -24,6 +24,7 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 		if(choice.equals("Attack Them"))
 		{
 			generateAttckStory();
+			execution.setVariable("requestedMonsterId", "thug");
 		}else if (choice.equals("Talk to Them"))
 		{
 			generateTalkStory();
