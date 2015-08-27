@@ -87,6 +87,8 @@ public class InMemoryH2Test {
 	    Task task = rule.getTaskService().createTaskQuery().singleResult();
 	    
 	    assertEquals("Create Your Character", task.getName());
+	    
+	    
 	    rule.getTaskService().complete(task.getId());
 
 	    // Fight or Flee Task
@@ -98,13 +100,13 @@ public class InMemoryH2Test {
 	    // This is the encounter monster task
 	    assertEquals("Encounter Monster", task.getName());
 	    
-	    String story = (String) rule.getRuntimeService().getVariable(task.getExecutionId(), "storyText");
+	    StoryModel story = (StoryModel) rule.getRuntimeService().getVariable(task.getExecutionId(), "storyText");
 	    System.out.println(story);
 	    
 	    CharacterModel player = (CharacterModel) rule.getRuntimeService().getVariable(task.getExecutionId(), "playerCharacter");
 	    System.out.println("Player's life points are: "+ player.getLifePoints());
 	    
-	    vars.put("startFight", true);
+	    vars.put("startFight", "YES");
 	    
 	    rule.getTaskService().complete(task.getId(),vars );
 	    

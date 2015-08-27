@@ -35,17 +35,21 @@
       <bpmn2:outgoing>SequenceFlow_0qgadyv</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_1x3li92" sourceRef="ServiceTask_02d4zyd" targetRef="ExclusiveGateway_01qzvm0"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_1v19060" name="Yes" sourceRef="ExclusiveGateway_01qzvm0" targetRef="UserTask_0plwjpu"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_0qgadyv" name="No" sourceRef="ExclusiveGateway_01qzvm0" targetRef="CallActivity_1q28nix"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_1v19060" name="Yes" sourceRef="ExclusiveGateway_01qzvm0" targetRef="UserTask_0plwjpu">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{true}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_0qgadyv" name="No" sourceRef="ExclusiveGateway_01qzvm0" targetRef="CallActivity_1q28nix">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{false}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
     <bpmn2:userTask id="UserTask_0plwjpu" name="Peaceful Resolution">
       <bpmn2:incoming>SequenceFlow_1v19060</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_1ucalmj</bpmn2:outgoing>
     </bpmn2:userTask>
-    <bpmn2:callActivity id="CallActivity_1q28nix" name="Fight Thug">
+    <bpmn2:callActivity id="CallActivity_1q28nix" name="Fight Thug" calledElement="fight">
       <bpmn2:incoming>SequenceFlow_0qgadyv</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_146em6a</bpmn2:outgoing>
     </bpmn2:callActivity>
-    <bpmn2:callActivity id="CallActivity_1uiix99" name="Fight Thug">
+    <bpmn2:callActivity id="CallActivity_1uiix99" name="Fight Thug" calledElement="fight">
       <bpmn2:incoming>SequenceFlow_1lp8lyd</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_0xmc1ua</bpmn2:outgoing>
     </bpmn2:callActivity>
@@ -74,8 +78,12 @@
       <bpmn2:outgoing>SequenceFlow_0v96s2j</bpmn2:outgoing>
     </bpmn2:exclusiveGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_146em6a" sourceRef="CallActivity_1q28nix" targetRef="ExclusiveGateway_0d0gx38"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_1m8fu6w" name="Yes" sourceRef="ExclusiveGateway_0d0gx38" targetRef="UserTask_0dttkx6"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_0v96s2j" name="No" sourceRef="ExclusiveGateway_0d0gx38" targetRef="UserTask_0uxrvhg"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_1m8fu6w" name="Yes" sourceRef="ExclusiveGateway_0d0gx38" targetRef="UserTask_0dttkx6">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{startFight}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_0v96s2j" name="No" sourceRef="ExclusiveGateway_0d0gx38" targetRef="UserTask_0uxrvhg">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression">#{!startFight}</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
     <bpmn2:endEvent id="EndEvent_0hap5k9" name="You are useless">
       <bpmn2:incoming>SequenceFlow_1hs4i79</bpmn2:incoming>
     </bpmn2:endEvent>

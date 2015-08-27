@@ -39,8 +39,12 @@ public class NameEditableFieldsUtil
 	{
 		HashMap<String, String> nameWithField = new HashMap<String, String>();
 		for (String myValue : fieldsList) {
-		    String newName = variableName + "." + myValue;
-		    
+			String newName;
+			if(variableName != null){
+				newName = variableName + "." + myValue;
+			}else {
+				newName = myValue;
+			}		    
 		    nameWithField.put(newName, capitalize(myValue));
  
 		}
@@ -57,7 +61,13 @@ public class NameEditableFieldsUtil
 		for (String myValue : fieldsListAndLables.keySet()) {
 			String lable = fieldsListAndLables.get(myValue);
 			
-		    String newName = variableName + "." + myValue;
+			String newName;
+			if(variableName != null){
+				newName = variableName + "." + myValue;
+			}else {
+				newName = myValue;
+			}
+			
 		    
 		    nameWithField.put(newName, lable);
  
