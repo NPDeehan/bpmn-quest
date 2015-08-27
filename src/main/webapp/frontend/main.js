@@ -46,6 +46,11 @@ window.addEventListener('load', function(evt) {
     document.getElementById('gameContainer').style.backgroundImage = "url('resources/landingPageBackgroundDark.jpg')";
   }
 
+  // replace bpmnio logo
+  var bjsContainer =document.getElementsByClassName('bjs-powered-by')[0];
+  bjsContainer.innerHTML = '<img src="resources/bpmn_io_logo.png" />';
+
+
 
   var GAME_ID = '';
   var currentTask = '';
