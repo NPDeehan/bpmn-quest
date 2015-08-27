@@ -28,6 +28,10 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 		}else if (choice.equals("Talk to Them"))
 		{
 			generateTalkStory();
+			if(marketingGuySaved==false)
+			{
+				execution.setVariable("requestedMonsterId", "thug");
+			}
 		}
 		else if(choice.equals("Kick their Leader in the Balls")){
 			generatKickStory();
