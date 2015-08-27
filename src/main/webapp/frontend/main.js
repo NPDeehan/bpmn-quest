@@ -24,8 +24,8 @@ window.addEventListener('load', function(evt) {
 
   var viewer = new BpmnViewer({ container: '#map' });
 
-  var serverUrl = "http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080";
-  //var serverUrl = "http://localhost:8080";
+  //var serverUrl = "http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080";
+  var serverUrl = "http://localhost:8080";
 
 	var processDefinitionKey = getURLParameter('game');
 	console.log(processDefinitionKey);
