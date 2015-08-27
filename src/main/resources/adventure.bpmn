@@ -81,14 +81,11 @@
         <bpmn2:errorEventDefinition id="ErrorEventDefinition_2" errorRef="Error_1"/>
       </bpmn2:startEvent>
       <bpmn2:sequenceFlow id="SequenceFlow_10" name="" sourceRef="StartEvent_2" targetRef="Task_1"/>
-      <bpmn2:endEvent id="EndEvent_3">
-        <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
-      </bpmn2:endEvent>
       <bpmn2:serviceTask id="ServiceTask_1" camunda:class="org.camunda.bpmn.quest.death.TweetBragDelegate" name="Brag">
         <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
       </bpmn2:serviceTask>
-      <bpmn2:sequenceFlow id="SequenceFlow_12" name="" sourceRef="ServiceTask_1" targetRef="EndEvent_3"/>
+      <bpmn2:sequenceFlow id="SequenceFlow_12" name="" sourceRef="ServiceTask_1" targetRef="UserTask_3"/>
       <bpmn2:userTask id="UserTask_2" camunda:assignee="demo" camunda:formKey="embedded:app:forms/dead.html" name="Moan Death">
         <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
@@ -99,6 +96,14 @@
         <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
       </bpmn2:serviceTask>
       <bpmn2:sequenceFlow id="SequenceFlow_4" name="" sourceRef="Task_1" targetRef="UserTask_2"/>
+      <bpmn2:endEvent id="EndEvent_3">
+        <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:userTask id="UserTask_3" camunda:assignee="demo" name="Say Goodbye">
+        <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
+        <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+      </bpmn2:userTask>
+      <bpmn2:sequenceFlow id="SequenceFlow_9" name="" sourceRef="UserTask_3" targetRef="EndEvent_3"/>
     </bpmn2:subProcess>
   </bpmn2:process>
   <bpmn2:error id="Error_1" errorCode="playerDied" name="Player died"/>
@@ -177,7 +182,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_SubProcess_2" bpmnElement="SubProcess_1" isExpanded="true">
-        <dc:Bounds height="162.0" width="678.0" x="83.0" y="257.0"/>
+        <dc:Bounds height="162.0" width="806.0" x="83.0" y="257.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_4" bpmnElement="StartEvent_2">
         <dc:Bounds height="36.0" width="36.0" x="121.0" y="315.0"/>
@@ -206,14 +211,14 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_EndEvent_34" bpmnElement="EndEvent_3">
-        <dc:Bounds height="36.0" width="36.0" x="640.0" y="315.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="768.0" y="315.0"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="658.0" y="356.0"/>
+          <dc:Bounds height="0.0" width="0.0" x="786.0" y="356.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_12" bpmnElement="SequenceFlow_12" sourceElement="_BPMNShape_ServiceTask_25" targetElement="_BPMNShape_EndEvent_34">
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_12" bpmnElement="SequenceFlow_12" sourceElement="_BPMNShape_ServiceTask_25" targetElement="_BPMNShape_UserTask_6">
         <di:waypoint xsi:type="dc:Point" x="596.0" y="333.0"/>
-        <di:waypoint xsi:type="dc:Point" x="640.0" y="333.0"/>
+        <di:waypoint xsi:type="dc:Point" x="636.0" y="333.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="613.0" y="333.0"/>
         </bpmndi:BPMNLabel>
@@ -263,6 +268,16 @@
         <di:waypoint xsi:type="dc:Point" x="364.0" y="333.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="6.0" width="6.0" x="318.0" y="333.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_UserTask_6" bpmnElement="UserTask_3">
+        <dc:Bounds height="80.0" width="100.0" x="636.0" y="293.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="_BPMNShape_UserTask_6" targetElement="_BPMNShape_EndEvent_34">
+        <di:waypoint xsi:type="dc:Point" x="736.0" y="333.0"/>
+        <di:waypoint xsi:type="dc:Point" x="768.0" y="333.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="6.0" width="6.0" x="758.0" y="333.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

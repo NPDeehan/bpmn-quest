@@ -82,12 +82,12 @@ public class MaterializeRiddleDelegate implements JavaDelegate {
 				));
 
 		riddles.add(new Riddle(
-				"Which BPMN construct is syntactically correct?",
-				"An association connecting a boundary compensation event and a compensation activity.",
-				"An expanded subrocess with a boundary message end event.",
-				"An association connecting a boundary compensation event and a compensation activity.",
-				"A message and a signal event connected with each other via a message flow.",
-				"I like beef. Beef is very tasty and I could have a nice beef steak every day.",
+				"An error event, a user task and an Complex Gateway go o holiday. Which one won't come back?",
+				"I have too much time.",
+				"The error event, because it keeps missing the flight.",
+				"the user task, because it's used up.",
+				"The Complex Gateway, because no one needs it.",
+				"I have too much time.",
 				10
 				));
 
