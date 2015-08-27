@@ -5,6 +5,7 @@ function getURLParameter(name) {
 window.addEventListener('load', function(evt) {
   'use strict';
 
+  var soundsEnabled = true;
 
   // preload sounds
   var sounds = {
@@ -18,7 +19,11 @@ window.addEventListener('load', function(evt) {
     dying2: new buzz.sound('resources/audio/niko_dying1.ogg'),
     miss1: new buzz.sound('resources/audio/jakob_miss1.ogg'),
     miss2: new buzz.sound('resources/audio/jakob_miss2.ogg'),
+    bgm: new buzz.sound('resources/audio/bgm_loop.ogg', {loop: true})
   };
+
+  sounds.bgm.play();
+  sounds.bgm.setVolume(4);
 
   var BpmnViewer = window.BpmnJS;
 
@@ -131,16 +136,16 @@ window.addEventListener('load', function(evt) {
             if(playerHealth === parseInt(lpsegment, 10)) {
               // no damage, play miss sound
               var soundnr = Math.random() > 0.9 ? 1 : 2;
-              sounds['miss' + soundnr].play();
+              if(soundsEnabled) sounds['miss' + soundnr].play();
             } else {
               if(parseInt(lpsegment, 10) > 0) {
                 // got damage, play hit sound
                 var soundnr = Math.floor(Math.random() * 3) + 1;
-                sounds['hit' + soundnr].play();
+                if(soundsEnabled) sounds['hit' + soundnr].play();
               } else {
                 // play dying sound
                 var soundnr = Math.random() > 0.5 ? 1 : 2;
-                sounds['dying' + soundnr].play();
+                if(soundsEnabled) sounds['dying' + soundnr].play();
               }
             }
             playerHealth = parseInt(lpsegment, 10);
@@ -150,16 +155,16 @@ window.addEventListener('load', function(evt) {
             if(enemyHealth === parseInt(lpsegment, 10)) {
               // no damage, play miss sound
               var soundnr = Math.random() > 0.9 ? 1 : 2;
-              sounds['miss' + soundnr].play();
+              if(soundsEnabled) sounds['miss' + soundnr].play();
             } else {
               if(parseInt(lpsegment, 10) > 0) {
                 // got damage, play hit sound
                 var soundnr = Math.floor(Math.random() * 3) + 1;
-                sounds['hit' + soundnr].play();
+                if(soundsEnabled) sounds['hit' + soundnr].play();
               } else {
                 // play dying sound
                 var soundnr = Math.random() > 0.5 ? 1 : 2;
-                sounds['dying' + soundnr].play();
+                if(soundsEnabled) sounds['dying' + soundnr].play();
               }
             }
             enemyHealth = parseInt(lpsegment, 10);
@@ -181,9 +186,9 @@ window.addEventListener('load', function(evt) {
       document.getElementById('story').appendChild(line);
 
       if(storyObject.title.indexOf('wrong!') !== -1) {
-        sounds.incorrect.play();
+        if(soundsEnabled) sounds.incorrect.play();
       } else if(storyObject.title.indexOf('solved the riddle') !== -1) {
-        sounds.correct.play();
+        if(soundsEnabled) sounds.correct.play();
       }
     }
 
@@ -217,7 +222,7 @@ window.addEventListener('load', function(evt) {
       btn.textContent = opt;
       (function(opt) {
         btn.addEventListener('click', function() {
-          sounds.click.play();
+          if(soundsEnabled) sounds.click.play();
           completeStep(opt);
         });
       })(opt);
@@ -557,7 +562,7 @@ window.addEventListener('load', function(evt) {
   document.getElementById('startButton').addEventListener('click', function( evt) {
     console.log('starting game');
 
-    sounds.click.play();
+    if(soundsEnabled) sounds.click.play();
 
     doStartCall();
 
@@ -565,5 +570,15 @@ window.addEventListener('load', function(evt) {
 
     showGame();
   });
+
+document.addEventListener('keydown', function(evt) {
+  console.log(evt);
+  if(evt.keyCode === 77) {
+    sounds.bgm.togglePlay();
+  } else if(evt.keyCode === 83) {
+    // toggle sound effects
+    soundsEnabled = !soundsEnabled;
+  }
+});
 
 });
