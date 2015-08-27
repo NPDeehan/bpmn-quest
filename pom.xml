@@ -40,6 +40,12 @@
     </dependency>
 
     <dependency>
+      <groupId>org.twitter4j</groupId>
+      <artifactId>twitter4j-core</artifactId>
+      <version>3.0.5</version>
+    </dependency>
+    
+    <dependency>
       <!-- AssertJ Testing Library -->
       <groupId>org.camunda.bpm.extension</groupId>
       <artifactId>camunda-bpm-assert</artifactId>

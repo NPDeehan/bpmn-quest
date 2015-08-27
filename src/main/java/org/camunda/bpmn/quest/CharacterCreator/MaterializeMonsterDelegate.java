@@ -27,9 +27,13 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 		
 		execution.setVariable("thisMonster", monsterDataValue);
 		
-		StoryModel story = new StoryModel("You Come Accross "+thisMonster.getCharacterName(), thisMonster.getMonsterStory() + "\n What do you want to do?");
-		story.addOption("Fight");
-		story.addOption("Sneak");
+		StoryModel story = new StoryModel();
+		story.setTitle("There is " + thisMonster.getCharacterName() + "!");
+		story.setDescription(thisMonster.getMonsterStory() + "\n What do you want to do?" );
+		story.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/" + thisMonster.getId() + ".png");
+		
+		story.addOption("Fight to Death!");
+		story.addOption("Sneak away...");
 		
 		
 		//delegateTask.setVariable("storyText", monster.getMonsterStory());

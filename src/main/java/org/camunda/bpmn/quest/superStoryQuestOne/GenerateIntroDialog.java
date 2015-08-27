@@ -8,6 +8,8 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.delegate.TaskListener;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.camunda.bpmn.quest.CharacterCreator.CharacterModel;
 import org.camunda.bpmn.quest.CharacterCreator.NameEditableFieldsUtil;
 import org.camunda.bpmn.quest.CharacterCreator.StoryModel;
@@ -24,23 +26,17 @@ public class GenerateIntroDialog implements JavaDelegate {
 				+ "While gernally you're not to fond of marketing people, you feel maybe if you help he'll learn a lesson and perhaps re-skill to become"
 				+ " something useful to society... or you could just gab some popcorn and watch the action! \n ";
 		
-		StoryModel newStory = new StoryModel(charMod.getCharacterName() + "finds a bit of trouble",  storytext );
+		StoryModel newStory = new StoryModel(charMod.getCharacterName() + " finds a bit of trouble",  storytext );
 		newStory.addOption("Help");
 		newStory.addOption("Ignore");
+		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/thugs.png");
 		
 	
-		// this is a map of fields that the user can edit 
-		// it contains the name of the variable and the name of the lable
-		Map<String, String> fields = new HashMap<String, String>();
-		fields.put("characterChoice", "Make your call");
+		ObjectValue storySerialized =
+				Variables.objectValue(newStory).serializationDataFormat("application/json").create();
+		
+		execution.setVariable("storyText", storySerialized);
 	
-		NameEditableFieldsUtil nefUtil = new NameEditableFieldsUtil();
-		
-		// this returns the json of the fields
-		String editableFields = nefUtil.getEditableFieldsInJson(fields, null);
-
-		
-		execution.setVariable("editableFields", editableFields);
 		execution.setVariable("storytext", storytext);
 		execution.setVariable("characterChoice", "Help"); // this is a default that can be edited by the user
 		

@@ -20,19 +20,19 @@ public class FightDelegate implements JavaDelegate {
 
 		StoryModel thisStory = new StoryModel();
 		thisStory.actionLog = result.getProtocol();
+		thisStory.addOption("Continue");
 
 		if (player.getLifePoints() < 1) {
 			// The Player has died
 			fightOutcome = "died";
 			thisStory.setTitle(monster.getCharacterName() + " has killed you!");
 			thisStory.setDescription("It was a fair fight and you lost, loser!");
-			thisStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/died.png");
 		} else {
 			// The Player has won
 			fightOutcome = "survived";
 			thisStory.setTitle("You've killed " + monster.getCharacterName() + "!");
 			thisStory.setDescription("It was a fair fight and you won, winner!");
-			thisStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/survived.png");
+			thisStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/survived.png");
 
 			player.addExperiencePoints(monster.getExperiencePoints());
 		}
@@ -50,7 +50,7 @@ public class FightDelegate implements JavaDelegate {
 		
 		execution.setVariable("storyText", storySerial);
 
-		
+		execution.setVariable("fightOutcome", fightOutcome);
 		
 		/* Legacy
 
