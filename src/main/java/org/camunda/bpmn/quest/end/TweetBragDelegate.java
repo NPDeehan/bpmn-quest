@@ -1,4 +1,4 @@
-package org.camunda.bpmn.quest.death;
+package org.camunda.bpmn.quest.end;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,7 +24,15 @@ public class TweetBragDelegate implements JavaDelegate {
 		String dateString = dt.format(date);
 		
 		CharacterModel player = (CharacterModel) execution.getVariable("playerCharacter");
-		String tweet = player.getCharacterName() + " has played #bpmnQuest and reached " + player.getExperiencePoints() + " XP. " + dateString;
+		
+		String end = (String) execution.getVariable("end");
+		String tweet = "";
+		if (end.equals("died")) {
+			tweet = player.getCharacterName() + " has died playing #bpmnQuest and reached " + player.getExperiencePoints() + " XP. " + dateString;			
+		} else {
+			tweet = "Woooha! " + player.getCharacterName() + " has won the #bpmnQuest and reached " + player.getExperiencePoints() + " XP! " + dateString;			
+		}
+
 		
 		System.out.println ("now tweeting: " + tweet);
 		
