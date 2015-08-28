@@ -19,6 +19,7 @@ public class ProcessRiddleAnswerDelegate implements JavaDelegate {
 		Riddle riddle = (Riddle) execution.getVariable("thisRiddle");
 		
 		StoryModel story = new StoryModel();
+		boolean riddleSolved = false;
 		
 		// Check if answer is correct
 		if (riddle.getAnswer().equals(decision)) {
@@ -36,7 +37,8 @@ public class ProcessRiddleAnswerDelegate implements JavaDelegate {
 			story.setDescription("You're freaking awesome and you've gained " + riddle.getExperiencePoints() + " Experience Points.");
 			story.setPicture("http://cdn.smosh.com/sites/default/files/legacy.images/smosh-pit/092010/dancefail-18.gif");
 	
-			
+			// Put variable that Riddle is solved 
+			riddleSolved = true;
 		} else {
 			// if it's not correct, prepare Story Object
 			story.setTitle("Sorry, that was wrong!");
@@ -48,7 +50,9 @@ public class ProcessRiddleAnswerDelegate implements JavaDelegate {
 		story.addOption("Continue");
 		ObjectValue storySerialized =
 				Variables.objectValue(story).serializationDataFormat("application/json").create();
-		execution.setVariable("storyText", storySerialized);			
+		execution.setVariable("storyText", storySerialized);	
+		
+		execution.setVariable("riddleSolved", riddleSolved);
 		
 	}
 
