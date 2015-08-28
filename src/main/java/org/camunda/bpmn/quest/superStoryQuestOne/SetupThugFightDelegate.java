@@ -14,11 +14,12 @@ public class SetupThugFightDelegate implements JavaDelegate {
 		CharacterModel  charMod = (CharacterModel) execution.getVariable("playerCharacter");
 		
 		String storytext = "You watch as the poor Marketing guy is beaten up - you feel a little guilty - but not as guilty as you should. After they"
-				+ " get bored of watching the marketing guy cry they see you. Then they run right for you! ";
+				+ " get bored of watching the marketing guy cry they see you. Then they attack! ";
 		
 		StoryModel newStory = new StoryModel("Watch and Laugh...",  storytext );
 		newStory.addOption("Continue");
-		//newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsers/img/thugs.png");
+		//newStory.setPicture("http://localhost:8080/CharacterCreator/img/punch.gif");
+		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/img/punch.gif");
 		
 	
 		ObjectValue storySerialized =

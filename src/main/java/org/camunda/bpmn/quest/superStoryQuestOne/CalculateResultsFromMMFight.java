@@ -85,12 +85,13 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 	}
 
 	private void generateAttckStory() {
-		String storytext = "You run at them, silently hoping that they become started by your bravery and scatter - but no... they see you coming and are "
-				+ "seemingly quite excited about maybe getting to beat you up ";
+		String storytext = "You bravely attack them! The marketing manager uses this opportunity to escape, but sadly he doesn’t hang around to help you fight off these nasty thugs! "
+				+ "It’s all up to you now";
 		
 		this.theStory = new StoryModel("ATTACK!!",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/thugs.png");
+		//theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/img/hero_fight.jpg");
+		theStory.setPicture("http://localhost:8080/CharacterCreator/img/hero_fight.jpg");
 		marketingGuySaved = false;
 		
 	}

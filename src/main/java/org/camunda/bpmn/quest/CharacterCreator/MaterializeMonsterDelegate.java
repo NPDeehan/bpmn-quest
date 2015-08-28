@@ -155,7 +155,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				50, // Luck
 				25, // Experience Points
 				"This guy is what's wrong with the youth of today - or so you tell yourself, in reality you're just bitter about "
-				+ "being older and less spritly" // Monster Story
+				+ "being older and less spritely" // Monster Story
 				));
 		
 		return monsters;	

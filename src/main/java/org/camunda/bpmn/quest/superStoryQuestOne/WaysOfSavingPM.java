@@ -16,12 +16,15 @@ public class WaysOfSavingPM implements JavaDelegate {
 
 		CharacterModel  charMod = (CharacterModel) execution.getVariable("playerCharacter");
 		
-		String storytext = "You've made the honerable choice of helping out the marketing manager.. but how exactly do you plan on helping him.."
+		String storytext = "You've made the honorable choice of helping out the marketing manager… But how exactly do you plan on helping him.."
 				+ "";
 		
 		StoryModel newStory = new StoryModel(charMod.getCharacterName() + " wants to help!",  storytext );
 		newStory.addOption("Attack Them");
 		newStory.addOption("Talk to Them");
+		newStory.setPicture("http://localhost:8080/CharacterCreator/img/hero_stand.png");
+		//newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/img/hero_stand.png");
+		
 		if(charMod.getPerception()>60)
 			newStory.addOption("Kick their Leader in the Balls");
 		
