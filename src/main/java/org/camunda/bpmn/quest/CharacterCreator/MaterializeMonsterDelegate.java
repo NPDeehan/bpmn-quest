@@ -22,7 +22,8 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 		
 		if(monsterNeeded != null )
 		{
-			for(MonsterModel thisLovelyMonster : monsters)
+			List<MonsterModel> allMonsters = generateAllMonstersPool();
+			for(MonsterModel thisLovelyMonster : allMonsters)
 			{
 				if(thisLovelyMonster.getId().equals(monsterNeeded))
 				{
@@ -83,8 +84,8 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				30, // Agility
 				30, // Luck
 				10, // Experience Points
-				"A story about Alfredo \n He's small and no one likes him - but for good reason. He's a Jerk you should "
-         		+ "probably crush him while you have the chance!" // Monster Story
+				"Alfredo is small and no one likes him - but for good reason. He's very annoying, you might argue that killing him would be TOO easy. "
+         		+ " I say that you should probably crush him while you have the chance!" // Monster Story
 				));
 	
 		monsters.add(new MonsterModel(
@@ -98,7 +99,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				70, // Agility
 				40, // Luck
 				40, // Experience Points
-				"a story about Boon Needa \n She's a fairly mean lady. I once saw her eat a kitten, a LIVE kitten. It was a very"
+				"Boon Needa is a fairly mean lady. I once saw her eat a kitten, a LIVE kitten. It was a very"
          		+ "sad day... AVENGE THE KITTEN!!"
 				));
 
@@ -113,9 +114,9 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				30, // Agility
 				10, // Luck
 				70, // Experience Points
-				"a story about False Oracle \n Well he's big very big, some would say overweight but wouldn't"
-         		+ "want to affend the guy. He's got a serious tempter and could probably crush you to death with his belly flaps... bad way to go - but without"
-         		+ "risk there is no reward go forth! kill the fat jerk"
+				"Wanna know more about the False Oracle? Well he's very bloated with means he's constantly in a bad mood "
+         		+ " He might be slow and hard to manage - but this guy can do serious damge so be careful"
+         		+ " but without risk there is no reward... maybe you should just kill the jerk"
 				));
 		
 		monsters.add(new MonsterModel(
@@ -129,10 +130,19 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				10, // Agility
 				20, // Luck
 				100, // Experience Points
-				"a story about Lord Web's Fear \n People know that he's made of evil and say that if you say his name"
-         		+ "3 times in a mirror he'll show up and why you're acting so stupid. He is very hard to install and really hurts a lot of peoples feelings! MURDER HIM!"
+				"So, Lord Web's Fear is scary! I've heard that he's made of pure evil and that if you say his name "
+         		+ "3 times in a mirror he'll show up and ask you why you're acting so stupid. He is very hard to install and really hurts a lot of peoples feelings! MURDER HIM!"
 				));
 		
+
+		
+		return monsters;		
+	}
+	
+	private List<MonsterModel> generateSpecialMonsterPool () {
+		
+		List<MonsterModel> monsters = new ArrayList<MonsterModel>();
+
 		monsters.add(new MonsterModel(
 				"thug",
 				"Thug",
@@ -144,11 +154,20 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				30, // Agility
 				50, // Luck
 				25, // Experience Points
-				"This is guy is what's wrong with the youth of today - or so you tell yourself, in reality you're just bitter about "
+				"This guy is what's wrong with the youth of today - or so you tell yourself, in reality you're just bitter about "
 				+ "being older and less spritly" // Monster Story
 				));
 		
-		return monsters;		
+		return monsters;	
 	}
+	
+	private List<MonsterModel> generateAllMonstersPool(){
+		
+		List<MonsterModel> monsters = generateMonsterPool();
+		monsters.addAll(generateSpecialMonsterPool());
+		
+		return monsters;
+	}
+	
 
 }
