@@ -90,8 +90,8 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 		
 		this.theStory = new StoryModel("ATTACK!!",  storytext );
 		theStory.addOption("Continue");
-		//theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/img/hero_fight.jpg");
-		theStory.setPicture("http://localhost:8080/CharacterCreator/img/hero_fight.jpg");
+		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/img/hero_fight.jpg");
+		//theStory.setPicture("http://localhost:8080/CharacterCreator/img/hero_fight.jpg");
 		marketingGuySaved = false;
 		
 	}
