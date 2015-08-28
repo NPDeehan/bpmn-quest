@@ -37,7 +37,6 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 			
 		}
 		
-		theStory.addOption("Continue");
 		ObjectValue storySerialized =
 				Variables.objectValue(theStory).serializationDataFormat("application/json").create();
 		
@@ -109,7 +108,7 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 		
 		this.theStory = new StoryModel("Is THIS your card?...",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/money.png");
+		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/money.gif");
 		
 		player.addExperiencePoints(15);
 

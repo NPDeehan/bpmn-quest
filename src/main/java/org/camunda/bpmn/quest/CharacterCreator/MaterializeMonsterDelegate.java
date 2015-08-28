@@ -158,6 +158,62 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				+ "being older and less spritely" // Monster Story
 				));
 		
+		monsters.add(new MonsterModel(
+				"jakob",
+				"Jakob The Great!",
+				50, // Strength
+				30, // Perception
+				20, // Endurance
+				30, // Charisma
+				30, // Intelligence
+				30, // Agility
+				50, // Luck
+				25, // Experience Points
+				"The fact he's your boss makes him a lot more scray... but at least you get to try and punch your boss - most people don't get that chance!" // Monster Story
+				));
+		
+		monsters.add(new MonsterModel(
+				"sebastian",
+				"Sebastian of Doom!",
+				50, // Strength
+				30, // Perception
+				20, // Endurance
+				30, // Charisma
+				30, // Intelligence
+				30, // Agility
+				50, // Luck
+				25, // Experience Points
+				"With the awesome power of front end development, Sebastian is a powerful enemy! " // Monster Story
+				));
+		
+		monsters.add(new MonsterModel(
+				"paddy",
+				"Paddy the Destructive",
+				50, // Strength
+				30, // Perception
+				20, // Endurance
+				30, // Charisma
+				30, // Intelligence
+				30, // Agility
+				50, // Luck
+				25, // Experience Points
+				"If he can break you as easily as he broke his own computer then you're in for some serious trouble... " // Monster Story
+				));
+		
+		monsters.add(new MonsterModel(
+				"niall",
+				"Niall of Death",
+				50, // Strength
+				30, // Perception
+				20, // Endurance
+				30, // Charisma
+				30, // Intelligence
+				30, // Agility
+				50, // Luck
+				25, // Experience Points
+				"If you wait long enought he'll probably fall over and kill himself - but you don't have time - you're going to have hit the poor little guy... like the bully you are!  " // Monster Story
+				));
+		
 		return monsters;	
 	}
 	
