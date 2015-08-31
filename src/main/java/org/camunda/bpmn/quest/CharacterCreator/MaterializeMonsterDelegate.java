@@ -75,7 +75,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 
 		monsters.add(new MonsterModel(
 				"alfredo",
-				"Alfredo",
+				"Dr. Bad Freienwalde",
 				30, // Strength
 				30, // Perception
 				30, // Endurance
@@ -90,7 +90,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 	
 		monsters.add(new MonsterModel(
 				"booneeda",
-				"Boo Needa",
+				"Görli",
 				40, // Strength
 				30, // Perception
 				30, // Endurance
@@ -99,13 +99,13 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				70, // Agility
 				40, // Luck
 				40, // Experience Points
-				"Boon Needa is a fairly mean lady. I once saw her eat a kitten, a LIVE kitten. It was a very"
-         		+ "sad day... AVENGE THE KITTEN!!"
+				"Görli is a fairly mean lady. I once saw her eat a kitten, a LIVE kitten. It was a very "
+         		+ "sad day... AVENGE THE KITTEN!"
 				));
 
 		monsters.add(new MonsterModel(
-				"falseoracle",
-				"The False Oracle",
+				"hellishator",
+				"The Hellish Ator",
 				70, // Strength
 				30, // Perception
 				30, // Endurance
@@ -114,9 +114,8 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				30, // Agility
 				10, // Luck
 				70, // Experience Points
-				"Wanna know more about the False Oracle? Well he's very bloated with means he's constantly in a bad mood "
-         		+ " He might be slow and hard to manage - but this guy can do serious damge so be careful"
-         		+ " but without risk there is no reward... maybe you should just kill the jerk"
+				"He may look cute but don't be fooled! behind that adorable little cape is a creature who would destroy the world if given the chance. "
+				+ "It would certainly be the most endearing way to end the world - but the downside is that the world could be gone "
 				));
 		
 		monsters.add(new MonsterModel(
@@ -131,7 +130,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 				20, // Luck
 				100, // Experience Points
 				"So, Lord Web's Fear is scary! I've heard that he's made of pure evil and that if you say his name "
-         		+ "3 times in a mirror he'll show up and ask you why you're acting so stupid. He is very hard to install and really hurts a lot of peoples feelings! MURDER HIM!"
+         		+ "3 times in a mirror he'll show up and ask you why you're acting so stupid. He really hurts a lot of peoples feelings! MURDER HIM!"
 				));
 		
 
@@ -160,57 +159,57 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 		
 		monsters.add(new MonsterModel(
 				"jakob",
-				"Jakob The Great!",
-				50, // Strength
+				"Jakob The Great",
+				70, // Strength
 				30, // Perception
 				20, // Endurance
 				30, // Charisma
 				30, // Intelligence
-				30, // Agility
-				50, // Luck
-				25, // Experience Points
+				10, // Agility
+				55, // Luck
+				100, // Experience Points
 				"The fact he's your boss makes him a lot more scray... but at least you get to try and punch your boss - most people don't get that chance!" // Monster Story
 				));
 		
 		monsters.add(new MonsterModel(
 				"sebastian",
-				"Sebastian of Doom!",
+				"Sneaky Sebastian",
 				50, // Strength
 				30, // Perception
-				20, // Endurance
+				90, // Endurance
 				30, // Charisma
 				30, // Intelligence
-				30, // Agility
+				60, // Agility
 				50, // Luck
-				25, // Experience Points
+				100, // Experience Points
 				"With the awesome power of front end development, Sebastian is a powerful enemy! " // Monster Story
 				));
 		
 		monsters.add(new MonsterModel(
 				"paddy",
-				"Paddy the Destructive",
-				50, // Strength
+				"Paddy Lord of Laptop Destructive",
+				90, // Strength
 				30, // Perception
-				20, // Endurance
+				10, // Endurance
 				30, // Charisma
 				30, // Intelligence
-				30, // Agility
-				50, // Luck
-				25, // Experience Points
+				10, // Agility
+				90, // Luck
+				100, // Experience Points
 				"If he can break you as easily as he broke his own computer then you're in for some serious trouble... " // Monster Story
 				));
 		
 		monsters.add(new MonsterModel(
 				"niall",
-				"Niall of Death",
+				"Niall the Injury-Prone",
 				50, // Strength
 				30, // Perception
-				20, // Endurance
+				70, // Endurance
 				30, // Charisma
 				30, // Intelligence
-				30, // Agility
-				50, // Luck
-				25, // Experience Points
+				40, // Agility
+				90, // Luck
+				100, // Experience Points
 				"If you wait long enought he'll probably fall over and kill himself - but you don't have time - you're going to have hit the poor little guy... like the bully you are!  " // Monster Story
 				));
 		
