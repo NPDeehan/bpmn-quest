@@ -7,7 +7,7 @@ This project has been generated originally by the Maven archetype
 ## How to use it?
 1. Build application WAR (See below)
 2. Deploy (copy) the WAR file to the Camunda Tomcat webapps folder
-3. Go to http://<YourServer>/CharacterCreator/frontend/ 
+3. Go to *http://(YourServer)/CharacterCreator/frontend/*  
    Eg. http://localhost:8080/CharacterCreator/frontend/
 
 ## How does it work?
