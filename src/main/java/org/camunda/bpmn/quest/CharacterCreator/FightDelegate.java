@@ -119,25 +119,21 @@ public class FightDelegate implements JavaDelegate {
 	}
 	
 	// Returns the number of life points drawed from the defender
-	private int attack (CharacterModel attacker, CharacterModel defender) {
-		// One attack can draw 0 to 10 Lifepoints
+	protected int attack (CharacterModel attacker, CharacterModel defender) {
+		// One attack can draw 0 to 20 Lifepoints
 		// Attack and Defense is influenced by Strength (50%), Agility (30%) and Luck (20%)		
+		long strengthRoll = Math.round((Dices.roll(4, 6) + attacker.getStrength()/10.0) - (Dices.roll(4, 6) + defender.getStrength()/10.0));
+	    long agilityRoll  = Math.round((Dices.roll(4, 6) + attacker.getAgility()/10.0 ) - (Dices.roll(4, 6) + defender.getAgility()/10.0 ));
+		long luckRoll     = Math.round((Dices.roll(4, 6) + attacker.getLuck()/10.0    ) - (Dices.roll(4, 6) + defender.getLuck()/10.0    ));
+		boolean attackerWin = Math.round(strengthRoll * 0.5 + agilityRoll * 0.3 + luckRoll * 0.2) > 0;
 
-		long sPercentage = Math.round ( (diceRoll() * attacker.getStrength()) -  (diceRoll() * defender.getStrength()  ) );
-	    long aPercentage = Math.round ( (diceRoll() * attacker.getAgility()) - ( (diceRoll() * defender.getAgility()) )  );
-		long lPercentage = Math.round ( (diceRoll() * attacker.getLuck()) - ( (diceRoll() * defender.getLuck()) ) );
-		
-		long lostLifePoints = Math.round (sPercentage * 0.5) + Math.round (aPercentage * 0.3) + Math.round (lPercentage * 0.2);
-
-		// Don't lose negative Lifepoints
-		if (lostLifePoints < 0) lostLifePoints = 0;
-		
+		long lostLifePoints = 0;
+		if (attackerWin) {
+			lostLifePoints = Dices.roll(1, 10) + attacker.getStrength()/10;
+		} else {
+			// Miss
+		}
 		return (int) lostLifePoints;
 	}
-	
-		private double diceRoll () {
-			// Between 0 and 1
-			return Math.random();
-		}
 
 }

@@ -5,6 +5,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.camunda.bpmn.quest.CharacterCreator.CharacterModel;
+import org.camunda.bpmn.quest.CharacterCreator.Dices;
 import org.camunda.bpmn.quest.CharacterCreator.StoryModel;
 
 
@@ -48,15 +49,15 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 
 	private void generateRandomStory() {
 		
-		boolean yourCard = random();
-		if(yourCard)
-		{
+		int yourCard = Dices.roll(2, 6);
+
+		if(yourCard >= 7) {
 			generateLuckyStory();
-		}else {
+		} else if (yourCard > 2){
 			generateUnluckyStory();
-			
+		} else {
+			generateVeryUnluckyStory();
 		}
-		
 	}
 
 	private void generateIntelligentStory() {
@@ -106,17 +107,6 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 		theStory.setPicture("/CharacterCreator/monsters/img/money.gif");
 		
 		player.addExperiencePoints(15);
-
-	}
-	
-	boolean random()
-	{
-	   int value = (int)(Math.random() * 100);
-	   
-	   if(value < 50)
-		   return true; //it's a hit!
-	   else
-		   return false; // it's a miss!
 	}
 
 }
