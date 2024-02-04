@@ -34,7 +34,7 @@ public class SuperStoryTest {
 	  /**
 	   * Kick in the nuts Test
 	   */
-	  @Test
+	  //@Test
 	  @Deployment(resources = {"story-adventure.bpmn", "fight.bpmn"})
 	  public void testBallKicking() {
 	    

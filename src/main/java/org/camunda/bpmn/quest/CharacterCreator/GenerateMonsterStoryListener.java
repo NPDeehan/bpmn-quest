@@ -12,8 +12,7 @@ public class GenerateMonsterStoryListener implements TaskListener {
 
 	@Override
 	public void notify(DelegateTask delegateTask) {
-		
-		
+
 		MonsterModel monster = (MonsterModel) delegateTask.getVariable("thisMonster");
 		
 		StoryModel story = new StoryModel("You Come Accross "+monster.getCharacterName(), monster.getMonsterStory() + "\n What do you want to do?");

@@ -19,7 +19,7 @@ public class SetupThugFightDelegate implements JavaDelegate {
 		StoryModel newStory = new StoryModel("Watch and Laugh...",  storytext );
 		newStory.addOption("Continue");
 		//newStory.setPicture("http://localhost:8080/CharacterCreator/img/punch.gif");
-		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/img/punch.gif");
+		newStory.setPicture("/CharacterCreator/img/punch.gif");
 		
 	
 		ObjectValue storySerialized =

@@ -19,15 +19,14 @@ public class MaterializeRiddleDelegate implements JavaDelegate {
 		
 		// Get Riddle randomly
 		Random rn = new Random();
-		int randomNumber = rn.nextInt(5);
+		int randomNumber = rn.nextInt(riddles.size());
 		Riddle riddle = riddles.get(randomNumber);
 		execution.setVariable("thisRiddle", riddle);		
 
 		StoryModel story = new StoryModel();
 		story.setTitle("Solve a Riddle");
 		story.setDescription(riddle.getQuestion());
-		for (Iterator<String> iter = riddle.getPossibleAnswers().iterator(); iter.hasNext(); ) {
-		    String element = iter.next();
+		for (String element : riddle.getPossibleAnswers()) {
 			story.addOption(element);
 		}
 		

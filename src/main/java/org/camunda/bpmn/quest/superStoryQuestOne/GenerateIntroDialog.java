@@ -28,7 +28,7 @@ public class GenerateIntroDialog implements JavaDelegate {
 		StoryModel newStory = new StoryModel(charMod.getCharacterName() + " finds a bit of trouble",  storytext );
 		newStory.addOption("Help!");
 		newStory.addOption("Laugh!");
-		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/img/thug_fight.jpg");
+		newStory.setPicture("/CharacterCreator/img/thug_fight.jpg");
 		//newStory.setPicture("http://localhost:8080/CharacterCreator/img/thug_fight.jpg");
 		
 	
@@ -37,7 +37,7 @@ public class GenerateIntroDialog implements JavaDelegate {
 		
 		execution.setVariable("storyText", storySerialized);
 
-		execution.setVariable("characterChoice", "Help"); // this is a default that can be edited by the user
+		execution.setVariable("characterChoice", "Help!"); // this is a default that can be edited by the user
 		
 		
 	}

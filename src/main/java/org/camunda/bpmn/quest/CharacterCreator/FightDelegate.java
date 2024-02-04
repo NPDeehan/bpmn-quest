@@ -5,11 +5,9 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
 
-import static org.camunda.spin.Spin.JSON;
-
 public class FightDelegate implements JavaDelegate {
 	CharacterModel player;
-	
+
 	public void execute(DelegateExecution execution) throws Exception {
 		
 		this.player = (CharacterModel) execution.getVariable("playerCharacter");
@@ -32,7 +30,7 @@ public class FightDelegate implements JavaDelegate {
 			fightOutcome = "survived";
 			thisStory.setTitle("You've killed " + monster.getCharacterName() + "!");
 			thisStory.setDescription("It was a fair fight and you won, winner!");
-			thisStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/survived.png");
+			thisStory.setPicture("/CharacterCreator/monsters/img/survived.png");
 
 			player.addExperiencePoints(monster.getExperiencePoints());
 		}
@@ -77,7 +75,7 @@ public class FightDelegate implements JavaDelegate {
 	}
 	
 	// Fight until one character is dead, return the other as the winner 
-	private FightResult fightToDeath (CharacterModel monster) {
+	protected FightResult fightToDeath (CharacterModel monster) {
 		FightResult result = new FightResult();
 		
 		CharacterModel attacker = monster;
@@ -98,13 +96,17 @@ public class FightDelegate implements JavaDelegate {
 
 			rounds ++;
 			
-	    	int lifePointsLost = attack(attacker, monster);
+	    	int lifePointsLost = attack(attacker, defender);
 	    	defender.setLifePoints( defender.getLifePoints() - lifePointsLost);
-	    	
-	    	result.getProtocol().add("Round #" + rounds + ": " + attacker.getCharacterName() + " attacks " + defender.getCharacterName() + 
-	    			" and rips of " + lifePointsLost + " LifePoints, leaving " + defender.getLifePoints() + " Lifepoints");
-	    	
-		
+
+			String attack = "Round #" + rounds + ": " + attacker.getCharacterName() + " attacks " + defender.getCharacterName();
+			if (lifePointsLost > 0) {
+				attack += " and rips off " + lifePointsLost + " LifePoints, leaving " + defender.getLifePoints() + " Lifepoints";
+			} else {
+				attack += " but misses...";
+			}
+			result.getProtocol().add(attack);
+
 		} while (defender.getLifePoints() > 0);
 			
 		//result.setWinner(attacker);

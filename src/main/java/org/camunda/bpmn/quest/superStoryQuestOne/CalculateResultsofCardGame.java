@@ -30,7 +30,7 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 			isDead = true;
 		}else if (player.getInteligance() > 54)
 		{
-			generateInteligantStory();
+			generateIntelligentStory();
 			
 		}else {
 			generateRandomStory();
@@ -59,13 +59,13 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 		
 	}
 
-	private void generateInteligantStory() {
+	private void generateIntelligentStory() {
 		String storytext = "You managed to use your superior intellect to realize that gambling is stupid and pointless! Why would anyone.. WAIT! you guessed correctly! "
 				+ "15 experience points - GAMBLING IS BRILLIANT!! W00000 ";
 		
 		this.theStory = new StoryModel("Is THIS your card?...",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/money.png");
+		theStory.setPicture("/CharacterCreator/monsters/img/money.png");
 		
 		player.addExperiencePoints(15);
 
@@ -79,36 +79,31 @@ public class CalculateResultsofCardGame implements JavaDelegate {
 		
 		this.theStory = new StoryModel("Is THIS your... FIRE?...",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/fire.png");
+		theStory.setPicture("/CharacterCreator/monsters/img/fire.png");
 		
 		player.setLifePoints(0);
-		
-		
-
 	}
 	
 
 	private void generateUnluckyStory()  
 	{
 		String storytext = "You make your guess and wait for your card to show up! - But you are SO unluckly that not only does your card not show up - but the room "
-				+ "bursts into flames... you don't mangage to escape.. and you die :(";
+				+ "bursts into flames... you mangage to escape... but you hurt :(";
 		
 		this.theStory = new StoryModel("Is THIS your... FIRE?...",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/fire.png");
+		theStory.setPicture("/CharacterCreator/monsters/img/fire.png");
 		
 		this.player.setLifePoints(this.player.getLifePoints() - 5);
-		
-		
-
 	}
+
 	private void generateLuckyStory() 
 	{
 		String storytext = "Well you're so lucky that no only did your card show up but you ALSO get 15 experience points - today is a good day to be alive! ";
 		
 		this.theStory = new StoryModel("Is THIS your card?...",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/money.gif");
+		theStory.setPicture("/CharacterCreator/monsters/img/money.gif");
 		
 		player.addExperiencePoints(15);
 

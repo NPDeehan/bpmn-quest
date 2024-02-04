@@ -34,11 +34,11 @@ public class FightTest {
 
   
   /**
-   * Riddle Test
+   * Fight Test
    */
   @Test
   @Deployment(resources = {"fight.bpmn"})
-  public void testRiddle() {
+  public void testFight() {
     
 	    HashMap variables = new HashMap();
 	    

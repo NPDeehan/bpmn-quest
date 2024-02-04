@@ -13,19 +13,18 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		
-		
+
 		List<MonsterModel> monsters = generateMonsterPool();
-		String monsterNeeded = (String) execution.getVariable("requestedMonsterId");
+		String requestedMonsterId = (String) execution.getVariable("requestedMonsterId");
 		
 		MonsterModel thisMonster = null;
 		
-		if(monsterNeeded != null )
+		if(requestedMonsterId != null )
 		{
 			List<MonsterModel> allMonsters = generateAllMonstersPool();
 			for(MonsterModel thisLovelyMonster : allMonsters)
 			{
-				if(thisLovelyMonster.getId().equals(monsterNeeded))
+				if(thisLovelyMonster.getId().equals(requestedMonsterId))
 				{
 					thisMonster = thisLovelyMonster;
 					break;
@@ -34,7 +33,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 					
 		}
 		
-		if(monsterNeeded == null)
+		if(thisMonster == null)
 		{
 			Random rn = new Random();
 			int randomNumber = rn.nextInt(monsters.size());
@@ -53,7 +52,7 @@ public class MaterializeMonsterDelegate implements JavaDelegate {
 		StoryModel story = new StoryModel();
 		story.setTitle("There is " + thisMonster.getCharacterName() + "!");
 		story.setDescription(thisMonster.getMonsterStory() + "\n What do you want to do?" );
-		story.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/" + thisMonster.getId() + ".png");
+		story.setPicture("/CharacterCreator/monsters/img/" + thisMonster.getId() + ".png");
 		
 		story.addOption("Fight to Death!");
 		story.addOption("Sneak away...");
