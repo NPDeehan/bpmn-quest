@@ -32,8 +32,11 @@ window.addEventListener('load', function(evt) {
   //var serverUrl = "http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080";
   var serverUrl = "http://localhost:8080";
 
-	var processDefinitionKey = getURLParameter('game');
-	console.log(processDefinitionKey);
+  var processDefinitionKey = getURLParameter('game');
+  if (!processDefinitionKey) {
+    processDefinitionKey = "adventure";
+  }
+  console.log(processDefinitionKey);
 
   var MAIN_PROCESS_INSTANCE_ID;
 
