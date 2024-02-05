@@ -32,8 +32,11 @@ window.addEventListener('load', function(evt) {
   //var serverUrl = "http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080";
   var serverUrl = "http://localhost:8080";
 
-	var processDefinitionKey = getURLParameter('game');
-	console.log(processDefinitionKey);
+  var processDefinitionKey = getURLParameter('game');
+  if (!processDefinitionKey) {
+    processDefinitionKey = "adventure"; // "adventure", "ceo", "superStory"
+  }
+  console.log(processDefinitionKey);
 
   var MAIN_PROCESS_INSTANCE_ID;
 
@@ -129,9 +132,10 @@ window.addEventListener('load', function(evt) {
     for(var i = 0; i < storyObject.fightLog.length; i++) {
       (function(i) {
         window.setTimeout(function() {
+          var fightEvent = storyObject.fightLog[i];
           var line = document.createElement('li');
           var elem = document.createElement('span');
-          elem.textContent = storyObject.fightLog[i];
+          elem.textContent = fightEvent;
           line.appendChild(elem);
           document.getElementById('story').appendChild(line);
 
@@ -139,13 +143,16 @@ window.addEventListener('load', function(evt) {
           document.getElementById('story').scrollTop = heightBefore;
 
           // parse text to get the current lifePoints
-          if(storyObject.fightLog[i].indexOf('attacks '+playerName) !== -1) {
-            var lpsegment = storyObject.fightLog[i].substr(storyObject.fightLog[i].indexOf('leaving ') + 8);
-            if(playerHealth === parseInt(lpsegment, 10)) {
+          var missed = fightEvent.indexOf('but misses...') !== -1;
+          var playerAttacked = fightEvent.indexOf('attacks '+playerName) !== -1;
+
+            if(missed) {
               // no damage, play miss sound
               var soundnr = Math.random() > 0.9 ? 1 : 2;
               if(soundsEnabled) sounds['miss' + soundnr].play();
+
             } else {
+              var lpsegment = fightEvent.substr(fightEvent.indexOf('leaving ') + 8);
               if(parseInt(lpsegment, 10) > 0) {
                 // got damage, play hit sound
                 var soundnr = Math.floor(Math.random() * 3) + 1;
@@ -155,29 +162,15 @@ window.addEventListener('load', function(evt) {
                 var soundnr = Math.random() > 0.5 ? 1 : 2;
                 if(soundsEnabled) sounds['dying' + soundnr].play();
               }
-            }
-            playerHealth = parseInt(lpsegment, 10);
-            updateHealthDisplay();
-          } else {
-            var lpsegment = storyObject.fightLog[i].substr(storyObject.fightLog[i].indexOf('leaving ') + 8);
-            if(enemyHealth === parseInt(lpsegment, 10)) {
-              // no damage, play miss sound
-              var soundnr = Math.random() > 0.9 ? 1 : 2;
-              if(soundsEnabled) sounds['miss' + soundnr].play();
-            } else {
-              if(parseInt(lpsegment, 10) > 0) {
-                // got damage, play hit sound
-                var soundnr = Math.floor(Math.random() * 3) + 1;
-                if(soundsEnabled) sounds['hit' + soundnr].play();
+
+              if(playerAttacked) {
+                playerHealth = parseInt(lpsegment, 10);
+                updateHealthDisplay();
               } else {
-                // play dying sound
-                var soundnr = Math.random() > 0.5 ? 1 : 2;
-                if(soundsEnabled) sounds['dying' + soundnr].play();
+                enemyHealth = parseInt(lpsegment, 10);
+                updateHealthDisplay();
               }
             }
-            enemyHealth = parseInt(lpsegment, 10);
-            updateHealthDisplay();
-          }
 
         }, i * fightSpeed);
       })(i);

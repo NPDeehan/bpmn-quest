@@ -37,17 +37,21 @@ public class TweetBragDelegate implements JavaDelegate {
 		System.out.println ("now tweeting: " + tweet);
 		
 		// Twitter Authentication with Demo User
+    
+ /* "401:Authentication credentials (https://dev.twitter.com/pages/auth) were missing or incorrect. 
+  *  Ensure that you have set valid consumer key/secret, access token/secret, and the system clock is in sync."
+   
 	    AccessToken accessToken = new AccessToken("220324559-jet1dkzhSOeDWdaclI48z5txJRFLCnLOK45qStvo", "B28Ze8VDucBdiE38aVQqTxOyPc7eHunxBVv7XgGim4say");
 	    Twitter twitter = new TwitterFactory().getInstance();
 	    twitter.setOAuthConsumer("lRhS80iIXXQtm6LM03awjvrvk", "gabtxwW8lnSL9yQUNdzAfgBOgIMSRqh7MegQs79GlKVWF36qLS");
 	    twitter.setOAuthAccessToken(accessToken);    
-
 		twitter.updateStatus(tweet);
+*/
 
 		StoryModel story = new StoryModel();
 		story.setTitle("Thank you for playing!");
 		story.setDescription("It was great fun - at least it was great fun to create this game, which happened in 2 days at the 2015 Camunda Hackdays. See you next year :-)" );
-		story.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/team.jpg");
+		story.setPicture("/CharacterCreator/team.jpg");
 		
 		ObjectValue storySerialized =
 				Variables.objectValue(story).serializationDataFormat("application/json").create();

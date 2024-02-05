@@ -18,9 +18,6 @@ public class InitializeAdventureListener implements ExecutionListener {
 				  .create();
 		
 		execution.setVariable("playerCharacter", playerDataValue);
-		
-		
 
 	}
-
 }

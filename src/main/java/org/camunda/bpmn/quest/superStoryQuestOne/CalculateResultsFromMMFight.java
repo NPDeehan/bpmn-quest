@@ -52,7 +52,7 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 		
 		this.theStory = new StoryModel("Ohhh.. that looked bad",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/nutskick.jpg");
+		theStory.setPicture("/CharacterCreator/monsters/img/nutskick.jpg");
 		
 		player.addExperiencePoints(55);
 		marketingGuySaved = true;
@@ -73,8 +73,8 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 			marketingGuySaved = true;
 			
 		}else{
-			String storytext = "You're try you best to explain that you are right and they should have been murdered at birth, but this just seems to make them"
-					+ "more angry... maybe they're less resonable than you thought. Also i think they're gonna fight you now...";
+			String storytext = "You're try your best to explain that you are right and they should have been murdered at birth, but this just seems to make them "
+					+ "more angry... Maybe they're less resonable than you thought. Also I think they're gonna fight you now...";
 			
 			this.theStory = new StoryModel("Let's just talk about this...",  storytext );
 			theStory.addOption("Continue");
@@ -90,7 +90,7 @@ public class CalculateResultsFromMMFight implements JavaDelegate {
 		
 		this.theStory = new StoryModel("ATTACK!!",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/img/hero_fight.jpg");
+		theStory.setPicture("/CharacterCreator/img/hero_fight.jpg");
 		//theStory.setPicture("http://localhost:8080/CharacterCreator/img/hero_fight.jpg");
 		marketingGuySaved = false;
 		

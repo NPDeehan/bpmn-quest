@@ -23,7 +23,7 @@ CharacterModel  charMod = (CharacterModel) execution.getVariable("playerCharacte
 			newStory.addOption("Punch At Random");
 
 		//newStory.setPicture("http://localhost:8080/CharacterCreator/img/evilboss.jpg");
-		newStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/img/warning.png");
+		newStory.setPicture("/CharacterCreator/img/warning.png");
 		
 	
 		ObjectValue storySerialized =

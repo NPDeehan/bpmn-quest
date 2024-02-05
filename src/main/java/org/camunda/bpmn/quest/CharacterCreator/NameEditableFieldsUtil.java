@@ -13,8 +13,7 @@ public class NameEditableFieldsUtil
 {
 	
 	Object javaObject;
-	
-	
+
 	public NameEditableFieldsUtil() {
 		// TODO Auto-generated constructor stub
 	}
@@ -52,9 +51,8 @@ public class NameEditableFieldsUtil
 		 String json = JSON(nameWithField).toString();
 		    
 		 return json;
-		
-		
 	}
+
 	public String getEditableFieldsInJson(Map<String, String> fieldsListAndLables, String variableName)
 	{
 		HashMap<String, String> nameWithField = new HashMap<String, String>();
@@ -76,8 +74,6 @@ public class NameEditableFieldsUtil
 		 String json = JSON(nameWithField).toString();
 		    
 		 return json;
-		
-		
 	}
 
 	private String capitalize(String myValue) {

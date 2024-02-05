@@ -6,15 +6,12 @@ import org.camunda.bpmn.quest.CharacterCreator.CharacterModel;
 
 public class MonsterModel extends CharacterModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private String monsterStory;
 	
 	public MonsterModel() {
-		
+		//.
 	}
 
 	public MonsterModel(String id, String characterName, int strength,
@@ -30,7 +27,6 @@ public class MonsterModel extends CharacterModel {
 
 	public MonsterModel(String characterName) {
 		super(characterName);
-
 	}
 
 	public String getMonsterStory() {

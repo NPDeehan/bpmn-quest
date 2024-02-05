@@ -35,7 +35,7 @@ public class ProcessRiddleAnswerDelegate implements JavaDelegate {
 			// prepare Story Object
 			story.setTitle("You've solved the riddle!");
 			story.setDescription("You're freaking awesome and you've gained " + riddle.getExperiencePoints() + " Experience Points.");
-			story.setPicture("http://cdn.smosh.com/sites/default/files/legacy.images/smosh-pit/092010/dancefail-18.gif");
+			// Broken :( story.setPicture("http://cdn.smosh.com/sites/default/files/legacy.images/smosh-pit/092010/dancefail-18.gif");
 	
 			// Put variable that Riddle is solved 
 			riddleSolved = true;
@@ -43,7 +43,7 @@ public class ProcessRiddleAnswerDelegate implements JavaDelegate {
 			// if it's not correct, prepare Story Object
 			story.setTitle("Sorry, that was wrong!");
 			story.setDescription("The right answer is: " + riddle.getAnswer());
-			story.setPicture("http://notalwaysright.com/wp-content/uploads/2013/09/funny-quotes-stupid-people.png");
+			// Broken :( story.setPicture("http://notalwaysright.com/wp-content/uploads/2013/09/funny-quotes-stupid-people.png");
 
 		}
 

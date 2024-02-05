@@ -51,7 +51,7 @@ public class ChooseBossDelegate implements JavaDelegate {
 		
 		this.theStory = new StoryModel("Terrible Idea!",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/nutskick.jpg");
+		theStory.setPicture("/CharacterCreator/monsters/img/nutskick.jpg");
 		
 		player.addExperiencePoints(55);
 		
@@ -64,7 +64,7 @@ public class ChooseBossDelegate implements JavaDelegate {
 		
 		this.theStory = new StoryModel("You Punched a Guy!",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/nutskick.jpg");
+		theStory.setPicture("/CharacterCreator/monsters/img/nutskick.jpg");
 		
 		player.addExperiencePoints(55);
 		
@@ -77,7 +77,7 @@ public class ChooseBossDelegate implements JavaDelegate {
 		
 		this.theStory = new StoryModel("Smart Move...",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/nutskick.jpg");
+		theStory.setPicture("/CharacterCreator/monsters/img/nutskick.jpg");
 		
 		player.addExperiencePoints(55);
 		
@@ -89,7 +89,7 @@ public class ChooseBossDelegate implements JavaDelegate {
 		
 		this.theStory = new StoryModel("Just attack and accept the consequences!",  storytext );
 		theStory.addOption("Continue");
-		theStory.setPicture("http://ec2-52-19-141-24.eu-west-1.compute.amazonaws.com:8080/CharacterCreator/monsters/img/nutskick.jpg");
+		theStory.setPicture("/CharacterCreator/monsters/img/nutskick.jpg");
 		
 		player.addExperiencePoints(55);
 		
